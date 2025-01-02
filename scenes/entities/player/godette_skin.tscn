@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://cfvbbx0fgsn5q"]
+
+[ext_resource type="PackedScene" uid="uid://bctcp65yp8t3f" path="res://graphics/characters/godette/godette.glb" id="1_ma4qe"]
+[ext_resource type="Script" path="res://scenes/entities/player/godette_skin.gd" id="2_aydc2"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vu3do"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dwyq2"]
+animation = &"Running_B"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l8tnn"]
+animation = &"Walking_A"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ta0tx"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5sjug"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3twg"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6bfhh"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5kkot"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ng4ef"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jccya"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yrys0"]
+states/End/position = Vector2(891, 61.25)
+states/Idle/node = SubResource("AnimationNodeAnimation_vu3do")
+states/Idle/position = Vector2(398.5, 61)
+states/Running/node = SubResource("AnimationNodeAnimation_dwyq2")
+states/Running/position = Vector2(662, 61.5)
+states/Start/position = Vector2(171, 61.25)
+states/Walking/node = SubResource("AnimationNodeAnimation_l8tnn")
+states/Walking/position = Vector2(519, -55.5)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ta0tx"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_5sjug"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_c3twg"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_6bfhh"), "Walking", "Running", SubResource("AnimationNodeStateMachineTransition_5kkot"), "Running", "Walking", SubResource("AnimationNodeStateMachineTransition_ng4ef"), "Walking", "Idle", SubResource("AnimationNodeStateMachineTransition_jccya")]
+graph_offset = Vector2(-74, -148)
+
+[node name="GodetteSkin" instance=ExtResource("1_ma4qe")]
+script = ExtResource("2_aydc2")
+
+[node name="Skeleton3D" parent="Rig" index="0"]
+bones/4/rotation = Quaternion(-0.514121, -0.485468, -0.485468, 0.514122)
+bones/4/scale = Vector3(0.999999, 0.999999, 1)
+bones/5/rotation = Quaternion(1.64805e-09, -5.95036e-08, -0.0552855, 0.998471)
+bones/6/rotation = Quaternion(-9.73784e-11, -2.98437e-10, 0.0266581, 0.999645)
+bones/6/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(1.60975e-09, 1.60975e-09, -0.707107, 0.707107)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.514121, 0.485468, 0.485468, 0.514122)
+bones/9/scale = Vector3(0.999999, 0.999999, 1)
+bones/10/rotation = Quaternion(1.64805e-09, 5.95036e-08, 0.0552855, 0.998471)
+bones/11/rotation = Quaternion(-9.73776e-11, 2.98437e-10, -0.0266581, 0.999645)
+bones/11/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(1.60973e-09, -1.60973e-09, 0.707107, 0.707107)
+bones/13/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(0.999849, -7.13277e-08, -1.20427e-08, 0.0173732)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(0.106225, 6.86529e-08, -7.37702e-08, 0.994342)
+bones/17/rotation = Quaternion(-0.455239, 1.6197e-08, -3.43567e-08, 0.890369)
+bones/18/rotation = Quaternion(4.77599e-08, 0.920355, -0.391084, 5.80156e-08)
+bones/18/scale = Vector3(1, 0.999997, 1)
+bones/19/rotation = Quaternion(0.999849, 7.42657e-08, -3.17263e-08, 0.0173732)
+bones/19/scale = Vector3(1, 1, 1)
+bones/20/rotation = Quaternion(0.106225, -6.86529e-08, 7.37702e-08, 0.994342)
+bones/22/rotation = Quaternion(2.12198e-08, 0.920355, -0.391084, 6.45059e-08)
+bones/22/scale = Vector3(1, 0.999997, 1)
+bones/23/rotation = Quaternion(0.707107, -2.29302e-07, -4.60552e-08, 0.707107)
+bones/26/rotation = Quaternion(-1.04035e-07, 0.391084, 0.920355, -2.95261e-08)
+bones/31/rotation = Quaternion(-0.707107, -7.05285e-08, -7.05285e-08, 0.707107)
+bones/33/rotation = Quaternion(-1.04035e-07, 0.391084, 0.920355, -2.9526e-08)
+bones/40/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_yrys0")
+anim_player = NodePath("../AnimationPlayer")
