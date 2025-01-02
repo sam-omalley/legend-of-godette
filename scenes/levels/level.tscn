@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ptutet4tgp0k"]
+[gd_scene load_steps=9 format=3 uid="uid://ptutet4tgp0k"]
 
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_2w6a1"]
 [ext_resource type="PackedScene" uid="uid://cnuo1oqakdnt" path="res://scenes/entities/player/player.tscn" id="1_op1g6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mxylv"]
@@ -23,7 +24,11 @@ size = Vector3(40, 0.5, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xjswi"]
 size = Vector3(40, 0.5, 40)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_03j72"]
+size = Vector3(10, 10, 1)
+
 [node name="Level" type="Node3D"]
+script = ExtResource("1_2w6a1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qgl8f")
@@ -31,9 +36,6 @@ environment = SubResource("Environment_qgl8f")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16566, 2.84494)
 
 [node name="Entities" type="Node3D" parent="."]
 
@@ -50,3 +52,12 @@ mesh = SubResource("BoxMesh_hncra")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_xjswi")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.4654)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/StaticBody3D2"]
+size = Vector3(10, 10, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D2"]
+shape = SubResource("BoxShape3D_03j72")
