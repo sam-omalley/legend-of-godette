@@ -46,6 +46,7 @@ func jump_logic(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= (jump_gravity if velocity.y > 0.0 else fall_gravity) * delta
+		skin.set_move_state('Jump')
 	
 	# Jump whenever the jump button is pressed, or if we have recently buffered
 	# a jump input.
@@ -73,12 +74,14 @@ func movement_logic(delta: float) -> void:
 	if movement_input:
 		velocity_2d += movement_input * acceleration * delta
 		velocity_2d = velocity_2d.limit_length(run_speed if is_running else base_speed)
-		skin.set_move_state('Running' if is_running else 'Walking')
+		if is_on_floor():
+			skin.set_move_state('Running' if is_running else 'Walking')
 
 		var target_angle: float = movement_input.angle()
 		skin.rotation.y = rotate_toward(skin.rotation.y, -target_angle + PI/2, rotation_speed * delta)
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, acceleration * delta)
-		skin.set_move_state('Idle')
+		if is_on_floor():
+			skin.set_move_state('Idle')
 	velocity.x = velocity_2d.x
 	velocity.z = velocity_2d.y

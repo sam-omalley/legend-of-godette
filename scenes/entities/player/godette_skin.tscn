@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cfvbbx0fgsn5q"]
+[gd_scene load_steps=21 format=3 uid="uid://cfvbbx0fgsn5q"]
 
 [ext_resource type="PackedScene" uid="uid://bctcp65yp8t3f" path="res://graphics/characters/godette/godette.glb" id="1_ma4qe"]
 [ext_resource type="Script" path="res://scenes/entities/player/godette_skin.gd" id="2_aydc2"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vu3do"]
 animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dil2l"]
+animation = &"Jump_Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dwyq2"]
 animation = &"Running_B"
@@ -33,17 +36,37 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jccya"]
 xfade_time = 0.2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_geljj"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m33bm"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f2kqj"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_23ki3"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6vm1v"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mftjn"]
+xfade_time = 0.1
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yrys0"]
 states/End/position = Vector2(891, 61.25)
 states/Idle/node = SubResource("AnimationNodeAnimation_vu3do")
 states/Idle/position = Vector2(398.5, 61)
+states/Jump/node = SubResource("AnimationNodeAnimation_dil2l")
+states/Jump/position = Vector2(519, 237)
 states/Running/node = SubResource("AnimationNodeAnimation_dwyq2")
 states/Running/position = Vector2(662, 61.5)
 states/Start/position = Vector2(171, 61.25)
 states/Walking/node = SubResource("AnimationNodeAnimation_l8tnn")
 states/Walking/position = Vector2(519, -55.5)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ta0tx"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_5sjug"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_c3twg"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_6bfhh"), "Walking", "Running", SubResource("AnimationNodeStateMachineTransition_5kkot"), "Running", "Walking", SubResource("AnimationNodeStateMachineTransition_ng4ef"), "Walking", "Idle", SubResource("AnimationNodeStateMachineTransition_jccya")]
-graph_offset = Vector2(-74, -148)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ta0tx"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_5sjug"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_c3twg"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_6bfhh"), "Walking", "Running", SubResource("AnimationNodeStateMachineTransition_5kkot"), "Running", "Walking", SubResource("AnimationNodeStateMachineTransition_ng4ef"), "Walking", "Idle", SubResource("AnimationNodeStateMachineTransition_jccya"), "Running", "Jump", SubResource("AnimationNodeStateMachineTransition_geljj"), "Jump", "Running", SubResource("AnimationNodeStateMachineTransition_m33bm"), "Walking", "Jump", SubResource("AnimationNodeStateMachineTransition_f2kqj"), "Jump", "Walking", SubResource("AnimationNodeStateMachineTransition_23ki3"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_6vm1v"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_mftjn")]
+graph_offset = Vector2(-46, -178)
 
 [node name="GodetteSkin" instance=ExtResource("1_ma4qe")]
 script = ExtResource("2_aydc2")
