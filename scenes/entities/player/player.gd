@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var base_speed: float = 10.0
 @export var run_speed: float = 15.0
 @export var acceleration: float = 100.0
+@export var rotation_speed: float = 10.0
 
 # Jump settings
 @export var jump_height: float = 2.25
@@ -16,6 +17,8 @@ extends CharacterBody3D
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+
+@onready var skin: Node3D = $GodetteSkin
 
 var jump_pressed: bool = false
 var jump_buffer_timer: Timer
@@ -65,14 +68,17 @@ func movement_logic(delta: float) -> void:
 	var movement_input: Vector2 = Input.get_vector("left", "right", "forward", "backward").rotated(-camera.global_rotation.y)
 	var velocity_2d: Vector2 = Vector2(velocity.x, velocity.z)
 
-	var speed: float = base_speed
-	if Input.is_action_pressed("run"):
-		speed = run_speed
+	var is_running: bool = Input.is_action_pressed("run")
 
 	if movement_input:
 		velocity_2d += movement_input * acceleration * delta
-		velocity_2d = velocity_2d.limit_length(speed)
+		velocity_2d = velocity_2d.limit_length(run_speed if is_running else base_speed)
+		skin.set_move_state('Running' if is_running else 'Walking')
+
+		var target_angle: float = movement_input.angle()
+		skin.rotation.y = rotate_toward(skin.rotation.y, -target_angle + PI/2, rotation_speed * delta)
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, acceleration * delta)
+		skin.set_move_state('Idle')
 	velocity.x = velocity_2d.x
 	velocity.z = velocity_2d.y
