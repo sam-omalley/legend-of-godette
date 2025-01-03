@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	jump_logic(delta)
 	movement_logic(delta)
 	animation_state_update()
+	ability_logic()
 
 	move_and_slide()
 
@@ -90,3 +91,7 @@ func movement_logic(delta: float) -> void:
 
 	velocity.x = velocity_2d.x
 	velocity.z = velocity_2d.y
+
+func ability_logic() -> void:
+	if Input.is_action_just_pressed("ability"):
+		skin.attack()
