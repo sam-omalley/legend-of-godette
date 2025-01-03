@@ -17,3 +17,4 @@ shape = SubResource("CapsuleShape3D_j6x2d")
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.4, 0)
 
 [node name="GodetteSkin" parent="." instance=ExtResource("3_go5l8")]
+defend_duration = 0.1

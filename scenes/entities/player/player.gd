@@ -4,6 +4,7 @@ extends CharacterBody3D
 # Movement settings
 @export var base_speed: float = 10.0
 @export var run_speed: float = 15.0
+@export var defend_speed: float = 5.0
 @export var acceleration: float = 100.0
 @export var rotation_speed: float = 10.0
 
@@ -19,11 +20,17 @@ extends CharacterBody3D
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 @onready var skin: Node3D = $GodetteSkin
+@onready var camera = $CameraController/Camera3D
 
 var jump_pressed: bool = false
 var jump_buffer_timer: Timer
 
-@onready var camera = $CameraController/Camera3D
+var defend: bool = false:
+	set(value):
+		if defend != value:
+			skin.defend(value)
+		defend = value
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -73,14 +80,19 @@ func jump_logic(delta: float) -> void:
 		velocity.y *= jump_slow_multiplier
 
 func movement_logic(delta: float) -> void:
+	var is_running: bool = Input.is_action_pressed("run")
 	var movement_input: Vector2 = Input.get_vector("left", "right", "forward", "backward").rotated(-camera.global_rotation.y)
 	var velocity_2d: Vector2 = Vector2(velocity.x, velocity.z)
-
-	var is_running: bool = Input.is_action_pressed("run")
+	 
+	var speed: float = base_speed
+	if is_running:
+		speed = run_speed
+	if defend:
+		speed = defend_speed
 
 	if movement_input:
 		velocity_2d += movement_input * acceleration * delta
-		velocity_2d = velocity_2d.limit_length(run_speed if is_running else base_speed)
+		velocity_2d = velocity_2d.limit_length(speed)
 
 		var target_angle: float = movement_input.angle()
 		skin.rotation.y = rotate_toward(skin.rotation.y, -target_angle + PI/2, rotation_speed * delta)
@@ -95,3 +107,4 @@ func movement_logic(delta: float) -> void:
 func ability_logic() -> void:
 	if Input.is_action_just_pressed("ability"):
 		skin.attack()
+	defend = Input.is_action_pressed("block")
