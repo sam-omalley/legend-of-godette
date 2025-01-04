@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var base_speed: float = 10.0
 @export var run_speed: float = 15.0
 @export var defend_speed: float = 5.0
+@export var speed_modifier: float = 1.0
 @export var acceleration: float = 100.0
 @export var rotation_speed: float = 10.0
 
@@ -30,6 +31,8 @@ var defend: bool = false:
 		if defend != value:
 			skin.defend(value)
 		defend = value
+	
+var weapon_active: bool = false
 
 
 func _ready() -> void:
@@ -40,11 +43,17 @@ func _ready() -> void:
 	jump_buffer_timer.timeout.connect(func() -> void: jump_pressed = false)
 	add_child(jump_buffer_timer)
 
+	skin.switch_weapon(weapon_active)
+
 func _physics_process(delta: float) -> void:
 	jump_logic(delta)
 	movement_logic(delta)
 	animation_state_update()
 	ability_logic()
+
+	if Input.is_action_just_pressed("ui_accept"):
+		skin.hit()
+		stop_movement(0.3, 0.3)
 
 	move_and_slide()
 
@@ -99,12 +108,31 @@ func movement_logic(delta: float) -> void:
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, acceleration * delta)
 
+	velocity_2d *= speed_modifier
+
 	skin.set_move_speed(velocity_2d.length(), run_speed)
 
 	velocity.x = velocity_2d.x
 	velocity.z = velocity_2d.y
 
 func ability_logic() -> void:
+	# Actual Attack
 	if Input.is_action_just_pressed("ability"):
-		skin.attack()
+		if weapon_active:
+			skin.attack()
+		else:
+			skin.cast_spell()
+			stop_movement(0.3, 0.3)
+	
+	# Defend
 	defend = Input.is_action_pressed("block")
+
+	# Switch between weapon and magic
+	if Input.is_action_just_pressed('switch weapon') and not skin.is_attacking():
+		weapon_active = not weapon_active
+		skin.switch_weapon(weapon_active)
+
+func stop_movement(start_duration: float, end_duration: float) -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "speed_modifier", 0.0, start_duration)
+	tween.tween_property(self, "speed_modifier", 1.0, end_duration)

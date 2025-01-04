@@ -40,16 +40,6 @@ shadow_enabled = true
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_op1g6")]
-base_speed = 10.0
-run_speed = 15.0
-defend_speed = 5.0
-acceleration = 100.0
-rotation_speed = 10.0
-jump_height = 2.25
-jump_slow_multiplier = 0.4
-jump_time_to_peak = 0.4
-jump_time_to_descent = 0.3
-jump_buffer_time = 0.1
 
 [node name="Environment" type="Node3D" parent="."]
 
