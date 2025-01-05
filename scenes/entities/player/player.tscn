@@ -6,7 +6,9 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6x2d"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_2htx5")
 base_speed = null
 run_speed = null
