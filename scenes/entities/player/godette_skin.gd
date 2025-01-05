@@ -12,6 +12,22 @@ extends Node3D
 @onready var weapon_sword: Node3D = %Sword
 @onready var weapon_wand: Node3D = %Wand
 
+const faces: Dictionary = {
+	'default': Vector3(0.0, 0.0, 0.0),
+	'blink': Vector3(0.0, 0.5, 0.0),
+	'happy': Vector3(0.5, 0.0, 0.0),
+	'angry': Vector3(0.5, 0.5, 0.0),
+}
+@onready var face_material: StandardMaterial3D = $Rig/Skeleton3D/Godette_Head.get_surface_override_material(0)
+
+var squash_and_stretch: float = 1.0:
+	set(value):
+		squash_and_stretch = value
+		var negative: float = 1.0 + (1.0 - squash_and_stretch)
+		scale = Vector3(negative, squash_and_stretch, negative)
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 var attack_requested: bool = false
 func _ready() -> void:
 	attack_buffer.timeout.connect(func() -> void:
@@ -67,3 +83,13 @@ func hit() -> void:
 
 	animation_tree.set("parameters/ExtraOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	animation_tree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
+
+func change_face(expression: String) -> void:
+	face_material.uv1_offset = faces[expression]
+
+
+func _on_blink_timer_timeout() -> void:
+	change_face('blink')
+	await get_tree().create_timer(0.2).timeout
+	change_face('default')
+	$Timers/BlinkTimer.wait_time = rng.randf_range(1.5, 3.0)

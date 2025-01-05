@@ -65,6 +65,7 @@ func animation_state_update() -> void:
 
 func jump() -> void:
 	velocity.y = -jump_velocity
+	do_squash_and_stretch(1.1, 0.15)
 
 func jump_logic(delta: float) -> void:
 	# Apply gravity
@@ -131,8 +132,14 @@ func ability_logic() -> void:
 	if Input.is_action_just_pressed('switch weapon') and not skin.is_attacking():
 		weapon_active = not weapon_active
 		skin.switch_weapon(weapon_active)
+		do_squash_and_stretch(0.95, 0.15)
 
 func stop_movement(start_duration: float, end_duration: float) -> void:
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(self, "speed_modifier", 0.0, start_duration)
 	tween.tween_property(self, "speed_modifier", 1.0, end_duration)
+
+func do_squash_and_stretch(value: float, duration: float) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(skin, "squash_and_stretch", value, duration)
+	tween.tween_property(skin, "squash_and_stretch", 1.0, duration * 1.8).set_ease(Tween.EASE_OUT)

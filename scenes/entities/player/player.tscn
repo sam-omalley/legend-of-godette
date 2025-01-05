@@ -8,6 +8,17 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_2htx5")
+base_speed = null
+run_speed = null
+defend_speed = null
+speed_modifier = null
+acceleration = null
+rotation_speed = null
+jump_height = null
+jump_slow_multiplier = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+jump_buffer_time = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
