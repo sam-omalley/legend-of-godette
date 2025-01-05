@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ptutet4tgp0k"]
+[gd_scene load_steps=10 format=3 uid="uid://ptutet4tgp0k"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_2w6a1"]
 [ext_resource type="PackedScene" uid="uid://cnuo1oqakdnt" path="res://scenes/entities/player/player.tscn" id="1_op1g6"]
+[ext_resource type="PackedScene" uid="uid://bja4s01ithhx" path="res://scenes/entities/enemies/boss.tscn" id="3_kbufr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mxylv"]
 sky_top_color = Color(0.8, 0.92549, 0.996078, 1)
@@ -41,9 +42,19 @@ shadow_enabled = true
 
 [node name="Player" parent="Entities" instance=ExtResource("1_op1g6")]
 
+[node name="Boss" parent="Entities" instance=ExtResource("3_kbufr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57665, 0, 0)
+attack_distance = null
+walk_speed = null
+run_speed = null
+turn_speed = null
+notice_radius = null
+attack_radius = null
+
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Floor" type="StaticBody3D" parent="Environment"]
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -55,6 +66,7 @@ shape = SubResource("BoxShape3D_xjswi")
 
 [node name="Wall" type="StaticBody3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.4654)
+collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/Wall"]
 size = Vector3(10, 10, 1)
