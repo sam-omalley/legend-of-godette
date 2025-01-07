@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cfvbbx0fgsn5q" path="res://scenes/entities/player/godette_skin.tscn" id="3_go5l8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6x2d"]
-height = 2.43275
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
@@ -24,7 +23,7 @@ jump_time_to_descent = null
 jump_buffer_time = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21267, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_j6x2d")
 
 [node name="CameraController" parent="." instance=ExtResource("2_qbhgi")]
