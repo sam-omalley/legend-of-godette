@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bja4s01ithhx"]
+[gd_scene load_steps=17 format=3 uid="uid://bja4s01ithhx"]
 
 [ext_resource type="PackedScene" uid="uid://dh1hn2jwpxx2s" path="res://scenes/entities/enemies/enemy.tscn" id="1_fibmi"]
 [ext_resource type="PackedScene" uid="uid://bt4il726k8d8x" path="res://graphics/characters/nagonford/Nagonford_Animated.glb" id="2_fyx6s"]
@@ -7,6 +7,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bmtch"]
 radius = 0.807964
 height = 6.325
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4ano"]
+size = Vector3(1.23926, 0.749084, 0.52832)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1m6fi"]
 animation = &"1H_Melee_Attack_Slice_Horizontal"
@@ -33,28 +36,37 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_57bgy")
 blend_point_2/pos = 0.7
 min_space = 0.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x3532"]
+animation = &"2H_Melee_Attack_Spinning"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_e246i"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ot64v"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6rike"]
-graph_offset = Vector2(-462.464, 84.3038)
+graph_offset = Vector2(-437, 54)
 nodes/AttackAnimation/node = SubResource("AnimationNodeAnimation_1m6fi")
 nodes/AttackAnimation/position = Vector2(-470, 430)
 nodes/AttackOneShot/node = SubResource("AnimationNodeOneShot_xwfsw")
 nodes/AttackOneShot/position = Vector2(110, 130)
 nodes/IdleWalkRun/node = SubResource("AnimationNodeBlendSpace1D_py2dj")
 nodes/IdleWalkRun/position = Vector2(-140, 180)
+nodes/Spin/node = SubResource("AnimationNodeAnimation_x3532")
+nodes/Spin/position = Vector2(100, 480)
+nodes/SpinBlend/node = SubResource("AnimationNodeBlend2_e246i")
+nodes/SpinBlend/position = Vector2(360, 110)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ot64v")
 nodes/TimeScale/position = Vector2(-90, 370)
-node_connections = [&"AttackOneShot", 0, &"IdleWalkRun", &"AttackOneShot", 1, &"TimeScale", &"TimeScale", 0, &"AttackAnimation", &"output", 0, &"AttackOneShot"]
+nodes/output/position = Vector2(590, 150)
+node_connections = [&"AttackOneShot", 0, &"IdleWalkRun", &"AttackOneShot", 1, &"TimeScale", &"SpinBlend", 0, &"AttackOneShot", &"SpinBlend", 1, &"Spin", &"TimeScale", 0, &"AttackAnimation", &"output", 0, &"SpinBlend"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bf8eq"]
+radius = 3.89895
 
 [node name="Boss" instance=ExtResource("1_fibmi")]
 script = ExtResource("2_u7s31")
-attack_distance = null
-walk_speed = null
-run_speed = null
-turn_speed = null
-notice_radius = null
-attack_radius = null
+attack_distance = 6.0
+spin_speed_multiplier = 3.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.16435, 0)
@@ -64,44 +76,44 @@ shape = SubResource("CapsuleShape3D_bmtch")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.14, 1.415, 0)
 
 [node name="Skeleton3D" parent="Skin/Rig" index="0"]
-bones/1/position = Vector3(0.00841076, 0.372361, 1.21849e-10)
+bones/1/position = Vector3(0.00841076, 0.376961, 1.21849e-10)
 bones/2/rotation = Quaternion(-0.0605995, -0.130282, -0.00797808, 0.989591)
-bones/3/rotation = Quaternion(0.0109117, 0.000356752, -0.00290194, 0.999936)
+bones/3/rotation = Quaternion(0.00208241, 6.80847e-05, -0.000553813, 0.999998)
 bones/4/position = Vector3(0.248044, 0.110857, 0.0825816)
-bones/4/rotation = Quaternion(-0.58225, -0.247451, -0.727633, 0.265149)
+bones/4/rotation = Quaternion(-0.578584, -0.248983, -0.733368, 0.255773)
 bones/4/scale = Vector3(0.999999, 0.999999, 1)
-bones/5/rotation = Quaternion(2.2811e-08, -6.42369e-08, -0.572345, 0.820013)
+bones/5/rotation = Quaternion(5.30413e-08, -4.39407e-08, -0.55458, 0.832131)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(5.11846e-11, -3.07743e-10, 0.0266581, 0.999645)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.178786, -0.682828, -0.0525086, 0.706417)
+bones/7/rotation = Quaternion(-0.192075, -0.674538, -0.0529901, 0.710843)
 bones/8/position = Vector3(5.13846e-10, 0.0961251, -0.0575)
 bones/8/rotation = Quaternion(-6.22192e-09, 4.31479e-09, -0.707107, 0.707107)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/position = Vector3(-0.176682, 0.111703, 0.0891542)
-bones/9/rotation = Quaternion(-0.25283, 0.358069, 0.835812, 0.330577)
+bones/9/rotation = Quaternion(-0.24921, 0.344674, 0.840965, 0.334473)
 bones/9/scale = Vector3(0.999999, 0.999999, 1)
-bones/10/rotation = Quaternion(5.59826e-10, 5.41232e-08, 0.560551, 0.82812)
+bones/10/rotation = Quaternion(2.45942e-08, 3.7041e-08, 0.570769, 0.821111)
 bones/11/rotation = Quaternion(5.11843e-11, 3.07737e-10, -0.0266581, 0.999645)
 bones/11/scale = Vector3(1, 1, 1)
-bones/12/rotation = Quaternion(-0.247928, 0.212375, -0.0969167, 0.940232)
+bones/12/rotation = Quaternion(-0.237167, 0.221348, -0.110479, 0.939442)
 bones/13/position = Vector3(-5.13849e-10, 0.0961251, -0.0575)
 bones/13/rotation = Quaternion(0.155711, -0.189455, 0.670289, 0.700409)
 bones/13/scale = Vector3(1, 1, 1)
-bones/15/rotation = Quaternion(0.0783936, 0.130472, 0.00923349, 0.988305)
+bones/15/rotation = Quaternion(0.0840847, 0.130448, 0.00556891, 0.987867)
 bones/17/position = Vector3(0.170945, 0.113587, 1.39233e-08)
-bones/17/rotation = Quaternion(0.992413, 0.074097, 0.0400755, 0.0895557)
+bones/17/rotation = Quaternion(0.993483, 0.0735057, 0.0393656, 0.077716)
 bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(0.389109, 6.70769e-08, -2.67905e-07, 0.921192)
-bones/19/rotation = Quaternion(-0.612533, -0.211751, 0.060845, 0.75912)
+bones/18/rotation = Quaternion(0.358034, 6.27789e-08, -2.50732e-07, 0.933709)
+bones/19/rotation = Quaternion(-0.596214, -0.213174, 0.0552181, 0.772034)
 bones/19/scale = Vector3(1, 1, 0.999999)
-bones/20/rotation = Quaternion(1.23491e-05, 0.920129, -0.391616, -2.83085e-06)
-bones/21/rotation = Quaternion(0.98928, -0.0397712, -0.012227, 0.139979)
+bones/20/rotation = Quaternion(3.44756e-05, 0.920148, -0.391571, -7.77505e-06)
+bones/21/rotation = Quaternion(0.990821, -0.0393407, -0.0118414, 0.128788)
 bones/21/scale = Vector3(1, 1, 1)
-bones/22/rotation = Quaternion(0.424372, -6.30288e-08, 2.94002e-07, 0.905488)
-bones/23/rotation = Quaternion(-0.621967, 0.111256, -0.0315074, 0.774459)
+bones/22/rotation = Quaternion(0.396069, -6.7033e-08, 2.69708e-07, 0.918221)
+bones/23/rotation = Quaternion(-0.606652, 0.111932, -0.0287476, 0.786523)
 bones/23/scale = Vector3(1, 1, 0.999999)
-bones/24/rotation = Quaternion(-7.85079e-06, 0.920135, -0.391602, 2.11257e-06)
+bones/24/rotation = Quaternion(-1.85222e-05, 0.920153, -0.391559, 4.42401e-06)
 bones/24/scale = Vector3(1, 0.999997, 1)
 bones/25/rotation = Quaternion(0.707107, -2.29302e-07, -4.60552e-08, 0.707107)
 bones/26/rotation = Quaternion(-0.707107, -7.05285e-08, -7.05285e-08, 0.707107)
@@ -120,18 +132,31 @@ bones/36/position = Vector3(-6.31128e-09, 0.16565, 2.70695e-09)
 bones/37/rotation = Quaternion(1, 3.76526e-09, 1.94879e-07, 7.45058e-09)
 bones/39/position = Vector3(0.839842, 0.719866, -0.447558)
 bones/39/rotation = Quaternion(-0.707107, -7.27951e-08, -7.27951e-08, 0.707107)
-bones/40/position = Vector3(0.341034, 0.811459, 0.406683)
-bones/40/rotation = Quaternion(0.618146, 0.0678621, 0.453624, 0.63837)
+bones/40/position = Vector3(0.339978, 0.817076, 0.411636)
+bones/40/rotation = Quaternion(0.613058, 0.0647761, 0.463078, 0.636807)
 bones/41/position = Vector3(-0.87741, 1.03555, -0.447559)
 bones/41/rotation = Quaternion(-0.707107, -7.27951e-08, -7.27951e-08, 0.707107)
-bones/42/position = Vector3(-0.34411, 0.822734, 0.28058)
-bones/42/rotation = Quaternion(0.318149, -0.224583, -0.908263, 0.152978)
+bones/42/position = Vector3(-0.336742, 0.82528, 0.275627)
+bones/42/rotation = Quaternion(0.328353, -0.224671, -0.904172, 0.155502)
 
 [node name="Nagonford_Axe" parent="Skin/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.210064, 0.779555, 0.590055, 0.61519, 0.363676, -0.699485, -0.759877, 0.509933, -0.40318, -0.28976, 0.687605, 0.353801)
+transform = Transform3D(0.21886, 0.765373, 0.60523, 0.617053, 0.371931, -0.693478, -0.755873, 0.525233, -0.390876, -0.279676, 0.690601, 0.349719)
 
 [node name="Nagonford_Cape" parent="Skin/Rig/Skeleton3D" index="1"]
-transform = Transform3D(0.965926, 0.0315801, -0.256885, -0.00584722, 0.994937, 0.100326, 0.258753, -0.0954054, 0.96122, 0.0279199, 1.17854, -0.0674065)
+transform = Transform3D(0.965926, 0.0315801, -0.256885, -0.00111598, 0.993027, 0.117881, 0.258817, -0.113578, 0.959226, 0.0279199, 1.18267, -0.0718268)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Skin/Rig/Skeleton3D" index="8"]
+transform = Transform3D(0.21886, 0.765373, 0.60523, 0.617053, 0.371931, -0.693478, -0.755873, 0.525233, -0.390876, -0.279676, 0.690601, 0.349719)
+bone_name = "Nagonford_Axe"
+bone_idx = 14
+
+[node name="AxeHitbox" type="Area3D" parent="Skin/Rig/Skeleton3D/BoneAttachment3D" index="0"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skin/Rig/Skeleton3D/BoneAttachment3D/AxeHitbox" index="0"]
+transform = Transform3D(1, 0, 3.2336e-15, 0, 1, 1.77351e-11, -3.8813e-16, 0, 1, 0, 0.85971, 1.19209e-07)
+shape = SubResource("BoxShape3D_a4ano")
 
 [node name="AnimationTree" parent="." index="2"]
 root_node = NodePath("%AnimationTree/../Skin")
@@ -141,12 +166,23 @@ parameters/AttackOneShot/active = false
 parameters/AttackOneShot/internal_active = false
 parameters/AttackOneShot/request = 0
 parameters/IdleWalkRun/blend_position = 0.0
+parameters/SpinBlend/blend_amount = 0.0
 parameters/TimeScale/scale = 0.5
 
 [node name="AttackTimer" parent="Timers" index="0"]
 wait_time = 5.0
 autostart = true
 
+[node name="Area3D" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26911, 0)
+shape = SubResource("SphereShape3D_bf8eq")
+
+[connection signal="body_entered" from="Skin/Rig/Skeleton3D/BoneAttachment3D/AxeHitbox" to="." method="_on_axe_hitbox_body_entered"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="Skin"]
