@@ -4,7 +4,6 @@ extends CharacterBody3D
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group('Player')
 @onready var skin := get_node('Skin')
 @onready var animation_tree: AnimationTree = %AnimationTree
-@onready var attack_animation: AnimationNodeAnimation = animation_tree.get_tree_root().get_node('AttackAnimation')
 
 @export var walk_speed: float = 3.0
 @export var run_speed: float = 6.0

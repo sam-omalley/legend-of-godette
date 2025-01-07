@@ -3,6 +3,7 @@ extends Enemy
 @export var attack_distance: float = 6.0
 @export var spin_speed_multiplier: float = 3.0
 
+@onready var attack_animation: AnimationNodeAnimation = animation_tree.get_tree_root().get_node('AttackAnimation')
 @onready var attack_timer: Timer = %AttackTimer
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
