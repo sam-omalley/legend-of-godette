@@ -60,8 +60,10 @@ func _on_area_3d_body_entered(_body: Node3D) -> void:
 		var tween = create_tween()
 		tween.tween_property(self, "speed_modifier", 1.0, 0.5)
 		tween.tween_method(_spin_transition, 1.0, 0.0, 0.3)
-		attack_timer.start()
-		spinning = false
+		tween.finished.connect(func() -> void:
+			spinning = false
+			attack_timer.start()
+		)
 
 func _on_axe_hitbox_body_entered(body: Node3D) -> void:
 	if is_attacking() or spinning:
