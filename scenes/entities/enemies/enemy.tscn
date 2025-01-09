@@ -16,3 +16,5 @@ unique_name_in_owner = true
 
 [node name="AttackTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
+wait_time = 5.0
+autostart = true

@@ -53,7 +53,7 @@ func _spin_transition(value: float) -> void:
 	animation_tree.set('parameters/SpinBlend/blend_amount', value)
 
 func set_attack_speed(speed: float) -> void:
-	animation_tree.set('parameters/TimeScale/scale', speed)
+	animation_tree.set('parameters/AttackSpeed/scale', speed)
 
 func _on_area_3d_body_entered(_body: Node3D) -> void:
 	if spinning:
