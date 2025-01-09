@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ptutet4tgp0k"]
+[gd_scene load_steps=17 format=3 uid="uid://ptutet4tgp0k"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_2w6a1"]
 [ext_resource type="PackedScene" uid="uid://cnuo1oqakdnt" path="res://scenes/entities/player/player.tscn" id="1_op1g6"]
@@ -38,6 +38,8 @@ albedo_texture = ExtResource("7_lu71q")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_03j72"]
 size = Vector3(10, 10, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pj33i"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_2w6a1")
@@ -86,3 +88,13 @@ material = SubResource("StandardMaterial3D_fpjhk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
 shape = SubResource("BoxShape3D_03j72")
+
+[node name="Area3D" type="Area3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.71514, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Area3D"]
+shape = SubResource("WorldBoundaryShape3D_pj33i")
+
+[connection signal="body_entered" from="Environment/Area3D" to="." method="_on_area_3d_body_entered"]
