@@ -6,7 +6,8 @@ extends CharacterBody3D
 @export var run_speed: float = 15.0
 @export var defend_speed: float = 5.0
 @export var speed_modifier: float = 1.0
-@export var acceleration: float = 100.0
+@export var acceleration: float = 40.0
+@export var deacceleration: float = 80.0
 @export var rotation_speed: float = 10.0
 
 # Jump settings
@@ -93,7 +94,7 @@ func movement_logic(delta: float) -> void:
 	var is_running: bool = Input.is_action_pressed("run")
 	var movement_input: Vector2 = Input.get_vector("left", "right", "forward", "backward").rotated(-camera.global_rotation.y)
 	var velocity_2d: Vector2 = Vector2(velocity.x, velocity.z)
-	 
+
 	var speed: float = base_speed
 	if is_running:
 		speed = run_speed
@@ -102,12 +103,13 @@ func movement_logic(delta: float) -> void:
 
 	if movement_input:
 		velocity_2d += movement_input * acceleration * delta
-		velocity_2d = velocity_2d.limit_length(speed)
+		#velocity_2d = velocity_2d.limit_length(speed)
+		velocity_2d = velocity_2d.move_toward(velocity_2d.limit_length(speed), deacceleration * delta)
 
 		var target_angle: float = movement_input.angle()
 		skin.rotation.y = rotate_toward(skin.rotation.y, -target_angle + PI/2, rotation_speed * delta)
 	else:
-		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, acceleration * delta)
+		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, deacceleration * delta)
 
 	velocity_2d *= speed_modifier
 
