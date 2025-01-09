@@ -69,3 +69,9 @@ func _on_area_3d_body_entered(_body: Node3D) -> void:
 func _on_axe_hitbox_body_entered(body: Node3D) -> void:
 	if is_attacking() or spinning:
 		body.skin.hit()
+
+func hit() -> void:
+	if not invuln_timer.time_left:
+		invuln_timer.start()
+		print("Boss was hit")
+

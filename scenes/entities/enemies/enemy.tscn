@@ -6,6 +6,12 @@
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_cqeux")
+run_speed = null
+turn_speed = null
+notice_radius = null
+attack_radius = null
+acceleration = null
+deacceleration = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 
@@ -18,3 +24,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 wait_time = 5.0
 autostart = true
+
+[node name="InvulnTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true

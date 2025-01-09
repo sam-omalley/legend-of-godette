@@ -93,3 +93,10 @@ func _on_blink_timer_timeout() -> void:
 	await get_tree().create_timer(0.2).timeout
 	change_face('default')
 	$Timers/BlinkTimer.wait_time = rng.randf_range(1.5, 3.0)
+
+func can_damage(value: bool) -> void:
+	weapon_sword.can_damage = value
+
+#1H_Melee_Attack_Chop
+#1H_Melee_Attack_Slice_Horizontal
+#1H_Melee_Attack_Slice_Diagonal

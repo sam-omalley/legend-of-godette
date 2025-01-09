@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	move_to_player(delta)
 
 func _on_attack_timer_timeout() -> void:
-	attack_timer.wait_time = rng.randf_range(4.0, 5.5)
+	attack_timer.wait_time = rng.randf_range(2.0, 4.0)
 	if position.distance_to(player.position) < attack_distance:
 		melee_attack_animation()
 

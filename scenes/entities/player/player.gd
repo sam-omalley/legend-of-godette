@@ -32,7 +32,7 @@ var defend: bool = false:
 			skin.defend(value)
 		defend = value
 	
-var weapon_active: bool = false
+var weapon_active: bool = true
 
 
 func _ready() -> void:
