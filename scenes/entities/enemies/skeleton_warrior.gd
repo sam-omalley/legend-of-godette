@@ -8,8 +8,7 @@ extends Enemy
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 const simple_attacks: Dictionary = {
-	'slice': '2H_Melee_Attack_Slice',
-	'range': '1H_Melee_Attack_Stab'
+	'slice': 'Dualwield_Melee_Attack_Slice'
 }
 
 func _physics_process(delta: float) -> void:
