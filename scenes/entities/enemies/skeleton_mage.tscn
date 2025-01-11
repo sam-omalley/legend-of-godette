@@ -62,12 +62,7 @@ node_connections = [&"AttackOneShot", 0, &"TimeScale", &"AttackOneShot", 1, &"At
 [node name="Skeleton Mage" instance=ExtResource("1_7jlsl")]
 script = ExtResource("2_pp05a")
 attack_distance = null
-run_speed = null
-turn_speed = null
-notice_radius = null
 attack_radius = 8.0
-acceleration = null
-deacceleration = null
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -79,7 +74,6 @@ shape = SubResource("CapsuleShape3D_762bb")
 bones/1/position = Vector3(7.02159e-09, 0.306717, -0.0294507)
 bones/1/rotation = Quaternion(2.21057e-10, 0.169709, 2.51331e-09, 0.985494)
 bones/2/rotation = Quaternion(0.11825, -0.127, 0.0240346, 0.984536)
-bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(0.285983, 0.000611642, 0.0263573, 0.957872)
 bones/4/position = Vector3(0.212007, 0.134132, 8.54828e-08)
 bones/4/rotation = Quaternion(-0.759724, -0.189635, -0.51748, 0.345069)
@@ -96,7 +90,6 @@ bones/12/rotation = Quaternion(-0.343056, 0.405629, -0.0862588, 0.842815)
 bones/13/position = Vector3(-2.29398e-10, 0.0961251, -0.0575)
 bones/13/rotation = Quaternion(0.0012182, 0.000447208, 0.706293, 0.707919)
 bones/14/rotation = Quaternion(-0.278061, -0.0436781, -0.00220177, 0.959567)
-bones/14/scale = Vector3(1, 1, 1)
 bones/16/position = Vector3(0.170945, 0.113088, -5.40796e-05)
 bones/16/rotation = Quaternion(0.92461, 0.131289, 0.215912, 0.285028)
 bones/17/rotation = Quaternion(0.640129, 4.35376e-08, -4.36381e-07, 0.768268)
@@ -115,7 +108,6 @@ bones/25/position = Vector3(0.201548, 0.0264757, 0.206118)
 bones/25/rotation = Quaternion(-0.703753, -7.07492e-08, -7.03417e-08, 0.710444)
 bones/26/position = Vector3(1.92428e-08, 0.362833, -2.42861e-15)
 bones/26/rotation = Quaternion(8.86565e-09, 3.76205e-09, 0.928512, -0.371304)
-bones/26/scale = Vector3(1, 1, 1)
 bones/27/position = Vector3(3.23444e-08, 0.213436, -1.02989e-08)
 bones/27/rotation = Quaternion(-8.64665e-08, 0.391084, 0.920355, -3.10779e-08)
 bones/28/position = Vector3(-2.09097e-08, 0.16565, -4.88125e-09)
@@ -141,7 +133,6 @@ bones/40/position = Vector3(-0.453507, 1.10218, -0.594853)
 bones/40/rotation = Quaternion(-0.707107, -7.27951e-08, -7.27951e-08, 0.707107)
 bones/41/position = Vector3(-0.544472, 0.748755, -0.0345733)
 bones/41/rotation = Quaternion(0.891213, -0.0361234, -0.43807, -0.111934)
-bones/41/scale = Vector3(1, 1, 1)
 
 [node name="Skeleton_Mage_Hat" parent="Skin/Rig/Skeleton3D" index="0"]
 transform = Transform3D(0.999768, -0.0181034, -0.0116607, 0.0144775, 0.965941, -0.258357, 0.0159407, 0.258128, 0.965979, -0.00883139, 1.56945, 0.397813)
