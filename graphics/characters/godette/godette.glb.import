@@ -12627,7 +12627,7 @@ _subresources={
 "slices/amount": 0
 },
 "Spellcast_Shoot": {
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://graphics/characters/godette/animations/spellcast.res",
 "settings/loop_mode": 0,
