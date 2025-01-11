@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export var run_speed: float = 15.0
 @export var defend_speed: float = 5.0
 @export var speed_modifier: float = 1.0
-@export var acceleration: float = 40.0
+@export var acceleration: float = 60.0
 @export var deacceleration: float = 80.0
 @export var rotation_speed: float = 10.0
 
@@ -145,3 +145,6 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(skin, "squash_and_stretch", value, duration)
 	tween.tween_property(skin, "squash_and_stretch", 1.0, duration * 1.8).set_ease(Tween.EASE_OUT)
+
+func hit() -> void:
+	skin.hit()

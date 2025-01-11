@@ -5,6 +5,9 @@ extends Enemy
 @onready var attack_animation: AnimationNodeAnimation = animation_tree.get_tree_root().get_node('AttackAnimation')
 @onready var attack_timer: Timer = %AttackTimer
 
+@onready var bone_left: Node3D = %BoneLeft
+@onready var bone_right: Node3D = %BoneRight
+
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 const simple_attacks: Dictionary = {
@@ -26,3 +29,7 @@ func melee_attack_animation() -> void:
 
 func set_attack_speed(speed: float) -> void:
 	animation_tree.set('parameters/AttackSpeed/scale', speed)
+
+func can_damage(value: bool) -> void:
+	bone_left.can_damage = value
+	bone_right.can_damage = value
