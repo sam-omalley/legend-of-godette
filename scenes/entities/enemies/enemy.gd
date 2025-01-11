@@ -13,6 +13,8 @@ extends CharacterBody3D
 @export var acceleration: float = 10.0
 @export var deacceleration: float = 20.0
 
+signal cast_spell(type: String, pos: Vector3, direction: Vector3, size: float)
+
 var squash_and_stretch: float = 1.0:
 	set(value):
 		squash_and_stretch = value
@@ -66,3 +68,6 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "squash_and_stretch", value, duration)
 	tween.tween_property(self, "squash_and_stretch", 1.0, duration * 1.8).set_ease(Tween.EASE_OUT)
+
+func shoot_spell() -> void:
+	cast_spell.emit('fireball', %SpellMarker.global_position, basis.z, 1.0)

@@ -22,9 +22,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	attack_timer.wait_time = rng.randf_range(4.0, 5.5)
-	if position.distance_to(player.position) < attack_distance:
+	var distance: float = position.distance_to(player.position)
+	if distance < attack_distance:
 		melee_attack_animation()
-	else:
+	elif distance < notice_radius:
 		if rng.randi() % 2 == 0:
 			range_attack_animation()
 		else:
@@ -40,6 +41,13 @@ func range_attack_animation() -> void:
 	set_attack_speed(1.0)
 	attack_animation.animation = simple_attacks['range']
 	animation_tree.set('parameters/AttackOneShot/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+func shoot_spell() -> void:
+	var spell_marker: Marker3D = %SpellMarker
+	var direction: Vector3 = (player.global_position - spell_marker.global_position).normalized()
+	# Do not change the elevation of the spell
+	direction.y = 0
+	cast_spell.emit('fireball', spell_marker.global_position, direction, 1.5)
 
 func spin_attack_animation() -> void:
 	var tween = create_tween()

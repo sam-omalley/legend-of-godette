@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6fs5ulhxis2v"]
+[gd_scene load_steps=4 format=3 uid="uid://b6fs5ulhxis2v"]
 
 [ext_resource type="Script" path="res://scenes/vfx/fireball.gd" id="1_bbswu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trx68"]
+albedo_color = Color(0.873865, 4.71681e-06, 6.73831e-07, 1)
+metallic = 0.36
+roughness = 0.0
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_es50l"]
 
@@ -12,6 +19,15 @@ script = ExtResource("1_bbswu")
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 radial_segments = 24
 rings = 12
+material = SubResource("StandardMaterial3D_trx68")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_es50l")
+
+[node name="DecayTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]
