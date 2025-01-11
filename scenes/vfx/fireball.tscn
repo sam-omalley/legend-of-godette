@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6fs5ulhxis2v"]
+
+[ext_resource type="Script" path="res://scenes/vfx/fireball.gd" id="1_bbswu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_es50l"]
+
+[node name="Fireball" type="Area3D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_bbswu")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radial_segments = 24
+rings = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_es50l")

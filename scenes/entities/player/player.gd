@@ -24,6 +24,8 @@ extends CharacterBody3D
 @onready var skin: Node3D = $GodetteSkin
 @onready var camera = $CameraController/Camera3D
 
+signal cast_spell(type: String, pos: Vector3, direction: Vector3, size: float)
+
 var jump_pressed: bool = false
 var jump_buffer_timer: Timer
 
@@ -149,3 +151,6 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 func hit() -> void:
 	skin.hit()
 	stop_movement(0.3, 0.3)
+
+func shoot_fireball(pos: Vector3) -> void:
+	cast_spell.emit('fireball', pos, skin.basis.z, 1.0)

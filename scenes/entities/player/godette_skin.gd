@@ -11,6 +11,7 @@ extends Node3D
 
 @onready var weapon_sword: Node3D = %Sword
 @onready var weapon_wand: Node3D = %Wand
+@onready var wand_marker: Marker3D = %WandMarker
 
 const faces: Dictionary = {
 	'default': Vector3(0.0, 0.0, 0.0),
@@ -75,6 +76,9 @@ func cast_spell() -> void:
 	if not is_attacking():
 		animation_tree.set_attack_animation(1)
 		animation_tree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+func shoot_fireball() -> void:
+	get_parent().shoot_fireball(wand_marker.global_position)
 	
 func hit() -> void:
 	# Change extra animation hit_A
