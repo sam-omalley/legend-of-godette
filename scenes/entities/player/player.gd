@@ -148,3 +148,4 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 
 func hit() -> void:
 	skin.hit()
+	stop_movement(0.3, 0.3)

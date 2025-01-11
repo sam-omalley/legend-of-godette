@@ -8,6 +8,7 @@ extends Enemy
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var spinning: bool = false
+var _can_damage: bool = false
 
 const simple_attacks: Dictionary = {
 	'slice': '2H_Melee_Attack_Slice',
@@ -67,11 +68,14 @@ func _on_area_3d_body_entered(_body: Node3D) -> void:
 		)
 
 func _on_axe_hitbox_body_entered(body: Node3D) -> void:
-	if is_attacking() or spinning:
-		body.skin.hit()
+	if (is_attacking() and _can_damage) or spinning:
+		if body and 'hit' in body:
+			body.hit()
 
 func hit() -> void:
 	if not invuln_timer.time_left:
 		invuln_timer.start()
 		print("Boss was hit")
 
+func can_damage(value: bool) -> void:
+	_can_damage = value
