@@ -70,4 +70,4 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 	tween.tween_property(self, "squash_and_stretch", 1.0, duration * 1.8).set_ease(Tween.EASE_OUT)
 
 func shoot_spell() -> void:
-	cast_spell.emit('fireball', %SpellMarker.global_position, basis.z, 1.0)
+	cast_spell.emit(GameStateManager.Spells.FIREBALL, %SpellMarker.global_position, basis.z, 1.0)

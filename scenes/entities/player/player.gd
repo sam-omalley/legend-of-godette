@@ -18,9 +18,10 @@ extends CharacterBody3D
 @export var jump_buffer_time: float = 0.1
 
 # Stats
-@export var health: int = 5:
+@export var max_health: int = 5
+var health: int:
 	set(value):
-		value = max(0, value)
+		value = clampi(value, 0, max_health)
 		ui.update_health(value)
 		health = value
 
@@ -35,7 +36,9 @@ extends CharacterBody3D
 
 @onready var ui: Control = %UI
 
-signal cast_spell(type: String, pos: Vector3, direction: Vector3, size: float)
+var current_spell := GameStateManager.Spells.FIREBALL
+
+signal cast_spell(type: int, pos: Vector3, direction: Vector3, size: float)
 
 var jump_pressed: bool = false
 var jump_buffer_timer: Timer
@@ -46,7 +49,12 @@ var defend: bool = false:
 			skin.defend(value)
 		defend = value
 	
-var weapon_active: bool = true
+var weapon_active: bool = true:
+	set(value):
+		weapon_active = value
+		skin.switch_weapon(weapon_active)
+		ui.get_node("Spells").visible = not weapon_active
+
 
 
 func _ready() -> void:
@@ -57,9 +65,10 @@ func _ready() -> void:
 	jump_buffer_timer.timeout.connect(func() -> void: jump_pressed = false)
 	add_child(jump_buffer_timer)
 
-	skin.switch_weapon(weapon_active)
+	# Ensure setter logic runs
+	weapon_active = true
 
-	ui.update_health(health)
+	health = max_health
 
 func _physics_process(delta: float) -> void:
 	jump_logic(delta)
@@ -146,6 +155,9 @@ func ability_logic() -> void:
 		weapon_active = not weapon_active
 		skin.switch_weapon(weapon_active)
 		do_squash_and_stretch(0.95, 0.15)
+	if Input.is_action_just_pressed('switch spell') and not skin.is_attacking():
+		current_spell = (int(current_spell) + 1) % len(GameStateManager.Spells) as GameStateManager.Spells
+		ui.update_spell(current_spell)
 
 func stop_movement(start_duration: float, end_duration: float) -> void:
 	var tween: Tween = create_tween()
@@ -165,5 +177,9 @@ func hit() -> void:
 
 		invuln_timer.start()
 
-func shoot_fireball(pos: Vector3) -> void:
-	cast_spell.emit('fireball', pos, skin.basis.z, 1.0)
+func shoot_magic(pos: Vector3) -> void:
+	match current_spell:
+		GameStateManager.Spells.FIREBALL:
+			cast_spell.emit(current_spell, pos, skin.basis.z, 1.0)
+		GameStateManager.Spells.HEAL:
+			health += 1

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://gk6g8x4u43u1"]
+[gd_scene load_steps=3 format=3 uid="uid://gk6g8x4u43u1"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/ui.gd" id="1_4lrqo"]
+[ext_resource type="Texture2D" uid="uid://3vh0pug1ilge" path="res://graphics/ui/fire.png" id="2_g5egc"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -20,10 +21,33 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
 
 [node name="HeartContainer" type="HBoxContainer" parent="Hearts/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 5
+
+[node name="Spells" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Spells"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="SpellTexture" type="TextureRect" parent="Spells/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_g5egc")
+expand_mode = 2
+stretch_mode = 4

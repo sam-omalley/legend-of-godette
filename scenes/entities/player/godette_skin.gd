@@ -77,8 +77,8 @@ func cast_spell() -> void:
 		animation_tree.set_attack_animation(1)
 		animation_tree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
-func shoot_fireball() -> void:
-	get_parent().shoot_fireball(spell_marker.global_position)
+func shoot_magic() -> void:
+	get_parent().shoot_magic(spell_marker.global_position)
 	
 func hit() -> void:
 	# Change extra animation hit_A
@@ -100,7 +100,3 @@ func _on_blink_timer_timeout() -> void:
 
 func can_damage(value: bool) -> void:
 	weapon_sword.can_damage = value
-
-#1H_Melee_Attack_Chop
-#1H_Melee_Attack_Slice_Horizontal
-#1H_Melee_Attack_Slice_Diagonal
