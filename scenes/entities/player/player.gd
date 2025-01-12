@@ -24,11 +24,22 @@ var health: int:
 		value = clampi(value, 0, max_health)
 		ui.update_health(value)
 		health = value
+
 const max_energy: int = 100
-var energy: int = max_energy:
+@export var spell_cost: float = 20.0
+@export var energy_recovery: float = 10.0
+var energy: float = max_energy:
 	set(value):
-		energy = clampi(value, 0, max_energy)
+		energy = clamp(value, 0, max_energy)
 		ui.update_energy(value)
+
+const max_stamina: int = 100
+@export var sprint_cost: float = 20.0
+@export var stamina_recovery: float = 10.0
+var stamina: float = max_stamina:
+	set(value):
+		stamina = clamp(value, 0, max_stamina)
+		ui.update_stamina(value)
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -74,6 +85,7 @@ func _ready() -> void:
 	weapon_active = true
 	health = max_health
 	energy = max_energy
+	stamina = max_stamina
 
 
 func _physics_process(delta: float) -> void:
@@ -122,8 +134,12 @@ func movement_logic(delta: float) -> void:
 	var velocity_2d: Vector2 = Vector2(velocity.x, velocity.z)
 
 	var speed: float = base_speed
-	if is_running:
+	if is_running and stamina > 0:
 		speed = run_speed
+		stamina -= sprint_cost * delta
+	elif not is_running:
+		stamina += stamina_recovery * delta
+
 	if defend:
 		speed = defend_speed
 
@@ -150,10 +166,10 @@ func ability_logic() -> void:
 		if weapon_active:
 			skin.attack()
 		else:
-			if energy >= 20:
+			if energy >= spell_cost:
 				skin.cast_spell()
 				stop_movement(0.3, 0.3)
-				energy -= 20
+				energy -= spell_cost
 	
 	# Defend
 	defend = Input.is_action_pressed("block")
@@ -193,4 +209,4 @@ func shoot_magic(pos: Vector3) -> void:
 			health += 1
 
 func _on_energy_recovery_timer_timeout() -> void:
-	energy += 1
+	energy += energy_recovery
