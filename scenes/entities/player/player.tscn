@@ -33,7 +33,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="EnergyRecoveryTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
 autostart = true
 
 [connection signal="timeout" from="Timers/EnergyRecoveryTimer" to="." method="_on_energy_recovery_timer_timeout"]

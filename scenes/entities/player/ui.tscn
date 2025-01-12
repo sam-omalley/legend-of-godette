@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://gk6g8x4u43u1"]
+[gd_scene load_steps=5 format=3 uid="uid://gk6g8x4u43u1"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/ui.gd" id="1_4lrqo"]
 [ext_resource type="Texture2D" uid="uid://3vh0pug1ilge" path="res://graphics/ui/fire.png" id="2_g5egc"]
 [ext_resource type="Texture2D" uid="uid://gi44t0kmhjr8" path="res://graphics/ui/bar_color.png" id="3_ol680"]
+[ext_resource type="Texture2D" uid="uid://ca408dm1c5imy" path="res://graphics/ui/circle.png" id="4_5ue4u"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -72,3 +73,33 @@ texture_under = ExtResource("3_ol680")
 texture_progress = ExtResource("3_ol680")
 tint_under = Color(0.14902, 0.14902, 0.14902, 1)
 tint_progress = Color(0.219608, 0.435294, 1, 1)
+
+[node name="Stamina" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Stamina"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Stamina/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 320
+theme_override_constants/margin_bottom = 300
+
+[node name="StaminaBar" type="TextureProgressBar" parent="Stamina/CenterContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+fill_mode = 4
+texture_under = ExtResource("4_5ue4u")
+texture_progress = ExtResource("4_5ue4u")
+tint_under = Color(0.14902, 0.14902, 0.14902, 1)
+tint_progress = Color(0.380392, 1, 0.356863, 1)
