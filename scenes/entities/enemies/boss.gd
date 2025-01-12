@@ -47,7 +47,7 @@ func shoot_spell() -> void:
 	var direction: Vector3 = (player.global_position - spell_marker.global_position).normalized()
 	# Do not change the elevation of the spell
 	direction.y = 0
-	cast_spell.emit('fireball', spell_marker.global_position, direction, 1.5)
+	cast_spell.emit(GameStateManager.Spells.FIREBALL, spell_marker.global_position, direction, 1.5)
 
 func spin_attack_animation() -> void:
 	var tween = create_tween()

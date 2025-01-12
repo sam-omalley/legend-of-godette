@@ -1,1 +1,0 @@
-current_spell = spells[spells.keys()[(int(current_spell) + 1) % len(spells)]]
