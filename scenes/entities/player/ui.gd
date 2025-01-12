@@ -42,3 +42,10 @@ func update_stamina(value: float) -> void:
 	#var tween: Tween = create_tween()
 	#tween.tween_property(stamina_bar, 'value', value, 0.5)
 	stamina_bar.value = value
+
+func change_stamina_alpha(value: float) -> void:
+	var tween = create_tween()
+	tween.tween_method(_change_alpha, 1.0 - value, value, 0.25)
+
+func _change_alpha(value: float) -> void:
+	stamina_bar.modulate.a = value

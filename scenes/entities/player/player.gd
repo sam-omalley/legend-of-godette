@@ -36,10 +36,19 @@ var energy: float = max_energy:
 const max_stamina: int = 100
 @export var sprint_cost: float = 20.0
 @export var stamina_recovery: float = 10.0
-var stamina: float = max_stamina:
+var stamina: float = 100:
 	set(value):
-		stamina = clamp(value, 0, max_stamina)
+		value = clamp(value, 0, max_stamina)
+
+		# Only show stamina bar when it is not 100%
+		if is_equal_approx(stamina, max_stamina) and value < max_stamina:
+			ui.change_stamina_alpha(1.0)
+		elif is_equal_approx(value, max_stamina) and stamina < max_stamina:
+			ui.change_stamina_alpha(0.0)
+
 		ui.update_stamina(value)
+		stamina = value
+
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -71,8 +80,6 @@ var weapon_active: bool = true:
 		skin.switch_weapon(weapon_active)
 		ui.get_node("Spells").visible = not weapon_active
 
-
-
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -86,6 +93,7 @@ func _ready() -> void:
 	health = max_health
 	energy = max_energy
 	stamina = max_stamina
+	ui.change_stamina_alpha(0.0)
 
 
 func _physics_process(delta: float) -> void:
