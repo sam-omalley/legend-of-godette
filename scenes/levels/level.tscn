@@ -57,6 +57,7 @@ signal_name = "cast_spell"
 [node name="Entities" type="Node" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource("1_op1g6")]
+unique_name_in_owner = true
 
 [node name="Boss" parent="Entities" instance=ExtResource("3_kbufr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2572, 0, -23.6197)
