@@ -2,6 +2,7 @@ extends Control
 
 @onready var heart_container: HBoxContainer = %HeartContainer
 @onready var spell_texture: TextureRect = %SpellTexture
+@onready var energy_bar: TextureProgressBar = %EnergyBar
 
 var heart_scene: PackedScene = preload("res://scenes/entities/player/heart.tscn")
 var fire_texture := preload("res://graphics/ui/fire.png")
@@ -24,9 +25,13 @@ func update_health(value: int) -> void:
 			var tween: Tween = heart.change_alpha(0.0)
 			tween.finished.connect(heart.queue_free)
 
-func update_spell(spell: int):
+func update_spell(spell: int) -> void:
 	match spell:
 		GameStateManager.Spells.FIREBALL:
 			spell_texture.texture = fire_texture
 		GameStateManager.Spells.HEAL:
 			spell_texture.texture = heal_texture
+
+func update_energy(value: int) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(energy_bar, 'value', value, 0.5)
