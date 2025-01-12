@@ -24,6 +24,11 @@ var health: int:
 		value = clampi(value, 0, max_health)
 		ui.update_health(value)
 		health = value
+const max_energy: int = 100
+var energy: int = max_energy:
+	set(value):
+		energy = clampi(value, 0, max_energy)
+		ui.update_energy(value)
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -67,8 +72,9 @@ func _ready() -> void:
 
 	# Ensure setter logic runs
 	weapon_active = true
-
 	health = max_health
+	energy = max_energy
+
 
 func _physics_process(delta: float) -> void:
 	jump_logic(delta)
@@ -144,8 +150,10 @@ func ability_logic() -> void:
 		if weapon_active:
 			skin.attack()
 		else:
-			skin.cast_spell()
-			stop_movement(0.3, 0.3)
+			if energy >= 20:
+				skin.cast_spell()
+				stop_movement(0.3, 0.3)
+				energy -= 20
 	
 	# Defend
 	defend = Input.is_action_pressed("block")
@@ -183,3 +191,6 @@ func shoot_magic(pos: Vector3) -> void:
 			cast_spell.emit(current_spell, pos, skin.basis.z, 1.0)
 		GameStateManager.Spells.HEAL:
 			health += 1
+
+func _on_energy_recovery_timer_timeout() -> void:
+	energy += 1

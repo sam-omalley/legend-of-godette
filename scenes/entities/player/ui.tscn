@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://gk6g8x4u43u1"]
+[gd_scene load_steps=4 format=3 uid="uid://gk6g8x4u43u1"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/ui.gd" id="1_4lrqo"]
 [ext_resource type="Texture2D" uid="uid://3vh0pug1ilge" path="res://graphics/ui/fire.png" id="2_g5egc"]
+[ext_resource type="Texture2D" uid="uid://gi44t0kmhjr8" path="res://graphics/ui/bar_color.png" id="3_ol680"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -51,3 +52,23 @@ layout_mode = 2
 texture = ExtResource("2_g5egc")
 expand_mode = 2
 stretch_mode = 4
+
+[node name="Energy" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Energy"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 50
+
+[node name="EnergyBar" type="TextureProgressBar" parent="Energy/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_under = ExtResource("3_ol680")
+texture_progress = ExtResource("3_ol680")
+tint_under = Color(0.14902, 0.14902, 0.14902, 1)
+tint_progress = Color(0.219608, 0.435294, 1, 1)
