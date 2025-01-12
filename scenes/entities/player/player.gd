@@ -25,6 +25,9 @@ var health: int:
 		ui.update_health(value)
 		health = value
 
+		if health <= 0:
+			death.emit()
+
 const max_energy: int = 100
 @export var spell_cost: float = 20.0
 @export var energy_recovery: float = 10.0
@@ -64,6 +67,7 @@ var stamina: float = 100:
 var current_spell := GameStateManager.Spells.FIREBALL
 
 signal cast_spell(type: int, pos: Vector3, direction: Vector3, size: float)
+signal death()
 
 var jump_pressed: bool = false
 var jump_buffer_timer: Timer
@@ -142,10 +146,10 @@ func movement_logic(delta: float) -> void:
 	var velocity_2d: Vector2 = Vector2(velocity.x, velocity.z)
 
 	var speed: float = base_speed
-	if is_running and stamina > 0:
+	if is_running and stamina > 0 and movement_input:
 		speed = run_speed
 		stamina -= sprint_cost * delta
-	elif not is_running:
+	elif not (is_running and movement_input):
 		stamina += stamina_recovery * delta
 
 	if defend:
