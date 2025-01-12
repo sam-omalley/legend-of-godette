@@ -17,12 +17,23 @@ extends CharacterBody3D
 @export var jump_time_to_descent: float = 0.3
 @export var jump_buffer_time: float = 0.1
 
+# Stats
+@export var health: int = 5:
+	set(value):
+		value = max(0, value)
+		ui.update_health(value)
+		health = value
+
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 @onready var skin: Node3D = $GodetteSkin
 @onready var camera = $CameraController/Camera3D
+
+@onready var invuln_timer: Timer = %InvulnTimer
+
+@onready var ui: Control = %UI
 
 signal cast_spell(type: String, pos: Vector3, direction: Vector3, size: float)
 
@@ -48,15 +59,13 @@ func _ready() -> void:
 
 	skin.switch_weapon(weapon_active)
 
+	ui.update_health(health)
+
 func _physics_process(delta: float) -> void:
 	jump_logic(delta)
 	movement_logic(delta)
 	animation_state_update()
 	ability_logic()
-
-	if Input.is_action_just_pressed("ui_accept"):
-		skin.hit()
-		stop_movement(0.3, 0.3)
 
 	move_and_slide()
 
@@ -149,8 +158,12 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 	tween.tween_property(skin, "squash_and_stretch", 1.0, duration * 1.8).set_ease(Tween.EASE_OUT)
 
 func hit() -> void:
-	skin.hit()
-	stop_movement(0.3, 0.3)
+	if not invuln_timer.time_left:
+		skin.hit()
+		stop_movement(0.3, 0.3)
+		health -= 1
+
+		invuln_timer.start()
 
 func shoot_fireball(pos: Vector3) -> void:
 	cast_spell.emit('fireball', pos, skin.basis.z, 1.0)
