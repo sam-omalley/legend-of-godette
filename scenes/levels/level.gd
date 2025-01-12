@@ -13,8 +13,9 @@ func _on_area_3d_body_entered(_body: Node3D) -> void:
 	get_tree().reload_current_scene()
 
 
-func shoot_spell(_type: String, pos: Vector3, direction: Vector3, _size: float) -> void:
+func shoot_spell(_type: String, pos: Vector3, direction: Vector3, size: float) -> void:
 	var fireball := fireball_scene.instantiate()
 	projectiles.add_child(fireball)
 	fireball.global_position = pos
 	fireball.direction = direction
+	fireball.setup(size)

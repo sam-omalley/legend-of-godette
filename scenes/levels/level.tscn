@@ -67,11 +67,6 @@ transform = Transform3D(-0.556368, 0, -0.830936, 0, 1, 0, 0.830936, 0, -0.556368
 [node name="Skeleton Mage" parent="Entities" instance=ExtResource("5_ek1ih")]
 transform = Transform3D(-0.571416, 0, -0.820661, 0, 1, 0, 0.820661, 0, -0.571416, 9.53703, 0, 8.64186)
 attack_distance = 12.0
-run_speed = 6.0
-turn_speed = 6.0
-notice_radius = 30.0
-acceleration = 10.0
-deacceleration = 20.0
 
 [node name="Environment" type="Node" parent="."]
 
