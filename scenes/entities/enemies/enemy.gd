@@ -13,6 +13,13 @@ extends CharacterBody3D
 @export var acceleration: float = 10.0
 @export var deacceleration: float = 20.0
 
+@export var max_health: int = 5;
+var health: int = max_health:
+	set(value):
+		health = value
+		if health <= 0:
+			queue_free()
+
 signal cast_spell(type: String, pos: Vector3, direction: Vector3, size: float)
 
 var squash_and_stretch: float = 1.0:
@@ -63,6 +70,7 @@ func hit() -> void:
 	if not invuln_timer.time_left:
 		do_squash_and_stretch(1.2, 0.15)
 		invuln_timer.start()
+		health -= 1
 
 func do_squash_and_stretch(value: float, duration: float) -> void:
 	var tween: Tween = create_tween()
