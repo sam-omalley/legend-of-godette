@@ -62,14 +62,6 @@ unique_name_in_owner = true
 
 [node name="Boss" parent="Entities" instance=ExtResource("3_kbufr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2572, 0, -23.6197)
-attack_distance = 6.0
-spin_speed_multiplier = 3.0
-run_speed = 6.0
-turn_speed = 6.0
-notice_radius = 30.0
-attack_radius = 4.0
-acceleration = 10.0
-deacceleration = 20.0
 
 [node name="Skeleton Warrior" parent="Entities" instance=ExtResource("4_b2xs7")]
 transform = Transform3D(-0.556368, 0, -0.830936, 0, 1, 0, 0.830936, 0, -0.556368, 13.8749, 0, 0)

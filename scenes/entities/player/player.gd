@@ -19,7 +19,7 @@ extends CharacterBody3D
 
 # Stats
 @export var max_health: int = 5
-var health: int:
+@onready var health: int:
 	set(value):
 		value = clampi(value, 0, max_health)
 		ui.update_health(value)
@@ -31,7 +31,7 @@ var health: int:
 const max_energy: int = 100
 @export var spell_cost: float = 20.0
 @export var energy_recovery: float = 10.0
-var energy: float = max_energy:
+@onready var energy: float = max_energy:
 	set(value):
 		energy = clamp(value, 0, max_energy)
 		ui.update_energy(value)
@@ -39,7 +39,7 @@ var energy: float = max_energy:
 const max_stamina: int = 100
 @export var sprint_cost: float = 20.0
 @export var stamina_recovery: float = 10.0
-var stamina: float = 100:
+@onready var stamina: float = 100:
 	set(value):
 		value = clamp(value, 0, max_stamina)
 

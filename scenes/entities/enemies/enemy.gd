@@ -13,12 +13,18 @@ extends CharacterBody3D
 @export var acceleration: float = 10.0
 @export var deacceleration: float = 20.0
 
-@export var max_health: int = 5;
-var health: int = max_health:
+@export var max_health: int = 1;
+@onready var health: int = max_health:
 	set(value):
 		health = value
-		if health <= 0:
-			queue_free()
+		if health <= 0 and not dead:
+			die()
+
+var dead = false:
+	set(value):
+		dead = value
+		set_process(not dead)
+		set_physics_process(not dead)
 
 signal cast_spell(type: String, pos: Vector3, direction: Vector3, size: float)
 
@@ -67,8 +73,9 @@ func is_attacking() -> bool:
 	return animation_tree.get("parameters/AttackOneShot/active")
 
 func hit() -> void:
-	if not invuln_timer.time_left:
-		do_squash_and_stretch(1.2, 0.15)
+	if not dead and not invuln_timer.time_left:
+		if health > 1:
+			animation_tree.set("parameters/HitOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		invuln_timer.start()
 		health -= 1
 
@@ -79,3 +86,15 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 
 func shoot_spell() -> void:
 	cast_spell.emit(GameStateManager.Spells.FIREBALL, %SpellMarker.global_position, basis.z, 1.0)
+
+func die() -> void:
+	dead = true
+	%CollisionShape3D.disabled = true
+	animation_tree.set('parameters/DeathOneShot/request', AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	animation_tree.animation_finished.connect(_handle_animation_finished)
+
+func _handle_animation_finished(animation_name: String) -> void:
+	if "Death" in animation_name:
+		var tween: Tween = create_tween()
+		tween.tween_property(%Skin, 'scale', Vector3.ONE * 0.1, 0.5)
+		tween.finished.connect(queue_free)
