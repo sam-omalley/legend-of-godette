@@ -83,7 +83,7 @@ func _on_axe_hitbox_body_entered(body: Node3D) -> void:
 func hit() -> void:
 	if not invuln_timer.time_left:
 		invuln_timer.start()
-		print("Boss was hit")
+		health -= 1
 
 func can_damage(value: bool) -> void:
 	_can_damage = value
