@@ -21,15 +21,16 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
-	attack_timer.wait_time = rng.randf_range(4.0, 5.5)
-	var distance: float = position.distance_to(player.position)
-	if distance < attack_distance:
-		melee_attack_animation()
-	elif distance < notice_radius:
-		if rng.randi() % 2 == 0:
-			range_attack_animation()
-		else:
-			spin_attack_animation()
+	if not dead:
+		attack_timer.wait_time = rng.randf_range(4.0, 5.5)
+		var distance: float = position.distance_to(player.position)
+		if distance < attack_distance:
+			melee_attack_animation()
+		elif distance < notice_radius:
+			if rng.randi() % 2 == 0:
+				range_attack_animation()
+			else:
+				spin_attack_animation()
 
 func melee_attack_animation() -> void:
 	set_attack_speed(0.5)
@@ -79,11 +80,6 @@ func _on_axe_hitbox_body_entered(body: Node3D) -> void:
 	if (is_attacking() and _can_damage) or spinning:
 		if body and 'hit' in body:
 			body.hit()
-
-func hit() -> void:
-	if not invuln_timer.time_left:
-		invuln_timer.start()
-		health -= 1
 
 func can_damage(value: bool) -> void:
 	_can_damage = value
