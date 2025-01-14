@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Legend of Godette"
-run/main_scene="res://scenes/levels/level.tscn"
+run/main_scene="res://scenes/levels/overworld.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://graphics/icon.png"
 
