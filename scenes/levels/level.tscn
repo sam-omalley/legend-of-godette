@@ -1,32 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://ptutet4tgp0k"]
+[gd_scene load_steps=7 format=3 uid="uid://ptutet4tgp0k"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_2w6a1"]
 [ext_resource type="PackedScene" uid="uid://cnuo1oqakdnt" path="res://scenes/entities/player/player.tscn" id="1_op1g6"]
 [ext_resource type="Script" path="res://global/signal_connector.gd" id="2_ap7to"]
-[ext_resource type="PackedScene" uid="uid://bja4s01ithhx" path="res://scenes/entities/enemies/boss.tscn" id="3_kbufr"]
-[ext_resource type="PackedScene" uid="uid://crlkr5ng8063k" path="res://scenes/entities/enemies/skeleton_warrior.tscn" id="4_b2xs7"]
-[ext_resource type="PackedScene" uid="uid://bjxtu5w0iei4s" path="res://scenes/entities/enemies/skeleton_mage.tscn" id="5_ek1ih"]
-[ext_resource type="Texture2D" uid="uid://cxwmqllnq2w51" path="res://graphics/grid/Dark/texture_01.png" id="6_q8cfn"]
-[ext_resource type="Texture2D" uid="uid://c36yvunt10jd3" path="res://graphics/grid/Light/texture_07.png" id="7_lu71q"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_hncra"]
-size = Vector3(80, 0.5, 80)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kggk8"]
-albedo_texture = ExtResource("6_q8cfn")
-uv1_scale = Vector3(6, 6, 6)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xjswi"]
-size = Vector3(80, 0.5, 80)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpjhk"]
-albedo_texture = ExtResource("7_lu71q")
-uv1_scale = Vector3(1, 0.5, 0)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_03j72"]
-size = Vector3(10, 5, 1)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pj33i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mxylv"]
 sky_top_color = Color(0.8, 0.92549, 0.996078, 1)
@@ -60,57 +36,16 @@ signal_name = "cast_spell"
 [node name="Player" parent="Entities" instance=ExtResource("1_op1g6")]
 unique_name_in_owner = true
 
-[node name="Boss" parent="Entities" instance=ExtResource("3_kbufr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2572, 0, -23.6197)
-
-[node name="Skeleton Warrior" parent="Entities" instance=ExtResource("4_b2xs7")]
-transform = Transform3D(-0.556368, 0, -0.830936, 0, 1, 0, 0.830936, 0, -0.556368, 13.8749, 0, 0)
-
-[node name="Skeleton Mage" parent="Entities" instance=ExtResource("5_ek1ih")]
-transform = Transform3D(-0.571416, 0, -0.820661, 0, 1, 0, 0.820661, 0, -0.571416, 9.53703, 0, 8.64186)
-attack_distance = 12.0
-
 [node name="Environment" type="Node" parent="."]
 
-[node name="Floor" type="StaticBody3D" parent="Environment"]
-collision_mask = 0
+[node name="Lighting" type="Node" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-mesh = SubResource("BoxMesh_hncra")
-surface_material_override/0 = SubResource("StandardMaterial3D_kggk8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-shape = SubResource("BoxShape3D_xjswi")
-
-[node name="Wall" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -6.465)
-collision_mask = 0
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Wall"]
-size = Vector3(10, 5, 1)
-material = SubResource("StandardMaterial3D_fpjhk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
-shape = SubResource("BoxShape3D_03j72")
-
-[node name="FallDeath" type="Area3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.71514, 0)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/FallDeath"]
-shape = SubResource("WorldBoundaryShape3D_pj33i")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
 environment = SubResource("Environment_qgl8f")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Projectiles" type="Node" parent="."]
 unique_name_in_owner = true
-
-[connection signal="body_entered" from="Environment/FallDeath" to="." method="_on_area_3d_body_entered"]
