@@ -18,7 +18,7 @@ extends CharacterBody3D
 	set(value):
 		health = value
 		if health <= 0 and not dead:
-			die()
+			call_deferred('die')
 
 var dead = false:
 	set(value):
