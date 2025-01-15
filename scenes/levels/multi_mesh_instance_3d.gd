@@ -4,6 +4,7 @@ extends MultiMeshInstance3D
 @export var mask: Texture2D
 @export var surface: MeshInstance3D
 @export var mesh_count: int = 100
+@export var reload_on_tab_change: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,5 +43,9 @@ func _ready() -> void:
 		var t = Transform3D(basis, Vector3(positions[idx]))
 		#t = t.scaled_local(Vector3.ONE * randf_range(0.5, 2) * (1.0 - scales[i]))
 		t = t.scaled_local(Vector3.ONE * (1.0 - scales[idx]) * 3.0)
-		t = t.rotated_local(basis.y, randf() * PI)
+		t = t.rotated_local(basis.y.normalized(), randf() * PI)
 		multimesh.set_instance_transform(i, t)
+
+func _enter_tree() -> void:
+	if reload_on_tab_change:
+		request_ready()
