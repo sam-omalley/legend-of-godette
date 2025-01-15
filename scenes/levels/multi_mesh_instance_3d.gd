@@ -42,7 +42,13 @@ func _ready() -> void:
 	setup()
 
 func setup() -> void:
-	multimesh.instance_count = mesh_count
+	if not surface or not surface.is_inside_tree():
+		return
+	# Set this to zero initially. Some parameters (like transform type) can't be
+	# changed if this is > 0.
+	multimesh.instance_count = 0
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+
 	var mdt := MeshDataTool.new()
 	mdt.create_from_surface(surface.mesh, 0)
 
@@ -63,6 +69,8 @@ func setup() -> void:
 			scales.append(shade)
 			positions.append(pos)
 	
+	# Set this as late as possible to avoid Godot errors.
+	multimesh.instance_count = mesh_count
 	for i in range(multimesh.instance_count):
 		#var t: Transform3D = multimesh.get_instance_transform(i)
 		#t.basis = basis
