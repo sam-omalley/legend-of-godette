@@ -1,14 +1,47 @@
 @tool
 extends MultiMeshInstance3D
 
-@export var mask: Texture2D
-@export var surface: MeshInstance3D
-@export var mesh_count: int = 100
-@export var reload_on_tab_change: bool = false
+@export var mask: Texture2D:
+	set(value):
+		mask = value
+		setup()
+@export var surface: MeshInstance3D:
+	set(value):
+		surface = value
+		setup()
+@export var mesh_count: int = 100:
+	set(value):
+		mesh_count = value
+		setup()
+
+@export var colour_mask: Color:
+	set(value):
+		colour_mask = value
+		setup()
+@export var min_scale: float = 0.2:
+	set(value):
+		min_scale = value
+		setup()
+@export var max_scale: float = 3.0:
+	set(value):
+		max_scale = value
+		setup()
+@export var mask_threshold: float = 0.0:
+	set(value):
+		mask_threshold = value
+		setup()
+
+# Hack to get a "reload" button. Never set value of checkbox to true.
+@export var reload: bool = false:
+	set(value):
+		setup()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	setup()
+
+func setup() -> void:
 	multimesh.instance_count = mesh_count
 	var mdt := MeshDataTool.new()
 	mdt.create_from_surface(surface.mesh, 0)
@@ -21,11 +54,13 @@ func _ready() -> void:
 	var scales: Array = []
 
 	for vtx in range(mdt.get_vertex_count()):
-		var col = image.get_pixelv(mdt.get_vertex_uv(vtx) * Vector2(image.get_size()))
-		if col.r < 0.8:
+		var col = image.get_pixelv(mdt.get_vertex_uv2(vtx) * Vector2(image.get_size()))
+		col *= colour_mask
+		var shade: float = max(col.r, col.g, col.b)
+		if shade > mask_threshold:
 			var vert = mdt.get_vertex(vtx)
 			var pos = surface.global_transform * vert
-			scales.append((col.r + col.g + col.b) / 3.0)
+			scales.append(shade)
 			positions.append(pos)
 	
 	print(len(positions))
@@ -42,10 +77,6 @@ func _ready() -> void:
 		var idx = randi_range(0, len(positions) - 1)
 		var t = Transform3D(basis, Vector3(positions[idx]))
 		#t = t.scaled_local(Vector3.ONE * randf_range(0.5, 2) * (1.0 - scales[i]))
-		t = t.scaled_local(Vector3.ONE * (1.0 - scales[idx]) * 3.0)
+		t = t.scaled_local(Vector3.ONE * clamp(max_scale * (scales[idx]), min_scale, max_scale))
 		t = t.rotated_local(basis.y.normalized(), randf() * PI)
 		multimesh.set_instance_transform(i, t)
-
-func _enter_tree() -> void:
-	if reload_on_tab_change:
-		request_ready()
