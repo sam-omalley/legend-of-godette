@@ -4,37 +4,37 @@ extends MultiMeshInstance3D
 @export var mask: Texture2D:
 	set(value):
 		mask = value
-		setup()
+		refresh()
 @export var surface: MeshInstance3D:
 	set(value):
 		surface = value
-		setup()
+		refresh()
 @export var mesh_count: int = 100:
 	set(value):
 		mesh_count = value
-		setup()
+		refresh()
 
 @export var colour_mask: Color:
 	set(value):
 		colour_mask = value
-		setup()
+		refresh()
 @export var min_scale: float = 0.2:
 	set(value):
 		min_scale = value
-		setup()
+		refresh()
 @export var max_scale: float = 3.0:
 	set(value):
 		max_scale = value
-		setup()
+		refresh()
 @export var mask_threshold: float = 0.0:
 	set(value):
 		mask_threshold = value
-		setup()
+		refresh()
 
 # Hack to get a "reload" button. Never set value of checkbox to true.
 @export var reload: bool = false:
 	set(value):
-		setup()
+		refresh()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -63,11 +63,6 @@ func setup() -> void:
 			scales.append(shade)
 			positions.append(pos)
 	
-	print(len(positions))
-	print(mdt.get_vertex_count())
-	print(scales.min(), " ", scales.max())
-
-
 	for i in range(multimesh.instance_count):
 		#var t: Transform3D = multimesh.get_instance_transform(i)
 		#t.basis = basis
@@ -80,3 +75,7 @@ func setup() -> void:
 		t = t.scaled_local(Vector3.ONE * clamp(max_scale * (scales[idx]), min_scale, max_scale))
 		t = t.rotated_local(basis.y.normalized(), randf() * PI)
 		multimesh.set_instance_transform(i, t)
+
+func refresh() -> void:
+	if Engine.is_editor_hint():
+		setup()
