@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbcisbe7uw8a5"]
+[gd_scene load_steps=12 format=3 uid="uid://dbcisbe7uw8a5"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_7dnb4"]
 [ext_resource type="MeshLibrary" uid="uid://2gyrxkhqdsu" path="res://graphics/environment/dungeon/dungeon_floor_tiles_col.tres" id="2_wual5"]
 [ext_resource type="MeshLibrary" uid="uid://2hmpbc0fseu3" path="res://graphics/environment/dungeon/dungeon_wall_tiles_col.tres" id="3_2pned"]
 [ext_resource type="PackedScene" uid="uid://b3gvqo445vopj" path="res://graphics/environment/dungeon objects/stairs.glb" id="4_wxgoc"]
+[ext_resource type="PackedScene" uid="uid://cvse7p2x0vr58" path="res://scenes/vfx/default_lighting.tscn" id="5_6km4s"]
 [ext_resource type="PackedScene" uid="uid://bhqt5vgwxv68w" path="res://graphics/environment/dungeon objects/pillar.glb" id="5_tq8ge"]
 [ext_resource type="PackedScene" uid="uid://chw0pqeh5pgfm" path="res://graphics/environment/dungeon objects/stool.glb" id="6_hcw6y"]
 [ext_resource type="PackedScene" uid="uid://ben46777uu8eu" path="res://graphics/environment/dungeon objects/table.glb" id="7_e1jms"]
@@ -44,6 +45,8 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.489
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68178, 7.77573, -0.0318142)
 mesh = SubResource("BoxMesh_m2dag")
+
+[node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("5_6km4s")]
 
 [node name="pillar2" parent="." index="5" instance=ExtResource("5_tq8ge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8352, 2.05022, 0.0790443)
