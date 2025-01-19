@@ -26,6 +26,10 @@ extends MultiMeshInstance3D
 	set(value):
 		max_scale = value
 		refresh()
+@export var scale_randomisation: float = 0.0:
+	set(value):
+		scale_randomisation = value
+		refresh()
 @export var mask_threshold: float = 0.0:
 	set(value):
 		mask_threshold = value
@@ -77,12 +81,24 @@ func setup() -> void:
 		#if t.basis.y.angle_to(basis.y) > deg_to_rad(5):
 			#t = t.translated_local(t.basis.y * -100)
 		#var t = Transform3D(basis, Vector3(positions.pick_random()))
+		if len(positions) == 0:
+			print("Error: Not enough positions for instance_count")
+			return
 		var idx = randi_range(0, len(positions) - 1)
 		var t = Transform3D(basis, Vector3(positions[idx]))
 		#t = t.scaled_local(Vector3.ONE * randf_range(0.5, 2) * (1.0 - scales[i]))
-		t = t.scaled_local(Vector3.ONE * clamp(max_scale * (scales[idx]), min_scale, max_scale))
+
+		var new_scale: float = max_scale * (scales[idx])
+		new_scale += randf_range(-scale_randomisation, scale_randomisation)
+		new_scale = clampf(new_scale, min_scale, max_scale)
+
+		t = t.scaled_local(Vector3.ONE * new_scale)
 		t = t.rotated_local(basis.y.normalized(), randf() * PI)
 		multimesh.set_instance_transform(i, t)
+
+		# Ensure we can't use the same position twice
+		positions.remove_at(idx)
+		scales.remove_at(idx)
 
 func refresh() -> void:
 	if Engine.is_editor_hint():
