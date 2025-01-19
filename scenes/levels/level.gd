@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
-		get_tree().quit()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_area_3d_body_entered(_body: Node3D) -> void:
 	die()
