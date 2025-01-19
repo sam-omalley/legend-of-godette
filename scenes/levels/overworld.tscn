@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://du2hy7ovj0rwa"]
+[gd_scene load_steps=16 format=3 uid="uid://du2hy7ovj0rwa"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
 [ext_resource type="PackedScene" uid="uid://cnx8e4v6j3cwv" path="res://graphics/environment/objects/tree4.glb" id="2_pr8hr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d2pglgy0w12pg" path="res://graphics/environment/objects/chest.glb" id="10_gajqy"]
 [ext_resource type="PackedScene" uid="uid://dxvaiymlygd8b" path="res://graphics/environment/objects/camp.glb" id="11_k634n"]
 [ext_resource type="PackedScene" uid="uid://c7738nua60tm5" path="res://scenes/levels/bridge.tscn" id="12_3q8dt"]
+[ext_resource type="PackedScene" uid="uid://dskf2jfwyjfx3" path="res://scenes/levels/castle.tscn" id="13_lkfsn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4lxt"]
 albedo_color = Color(0.0603541, 0.505562, 0.610572, 1)
@@ -133,3 +134,6 @@ transform = Transform3D(0.476192, 0, 0.879341, 0, 1, 0, -0.879341, 0, 0.476192, 
 
 [node name="Bridge" parent="Environment" index="9" instance=ExtResource("12_3q8dt")]
 transform = Transform3D(1.13523, 3.30291e-17, -0.356849, 0.0154224, 1.18889, 0.049063, 0.356516, -0.0514298, 1.13417, 36.5296, -39.6213, 253.401)
+
+[node name="castle" parent="Environment" index="10" instance=ExtResource("13_lkfsn")]
+transform = Transform3D(0.212161, 0, 0.977235, 0, 1, 0, -0.977235, 0, 0.212161, 22.593, -37.3298, 365.983)
