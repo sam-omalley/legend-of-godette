@@ -72,9 +72,9 @@ func switch_weapon(weapon_active: bool) -> void:
 
 	animation_tree.set_weapon_active(weapon_active)
 
-func cast_spell() -> void:
+func cast_spell(current_spell) -> void:
 	if not is_attacking():
-		animation_tree.set_attack_animation(1)
+		animation_tree.set_current_spell(current_spell)
 		animation_tree.set("parameters/AttackOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func shoot_magic() -> void:

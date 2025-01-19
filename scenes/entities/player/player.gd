@@ -179,7 +179,7 @@ func ability_logic() -> void:
 			skin.attack()
 		else:
 			if energy >= spell_cost:
-				skin.cast_spell()
+				skin.cast_spell(current_spell)
 				stop_movement(0.3, 0.3)
 				energy -= spell_cost
 	
