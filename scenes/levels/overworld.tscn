@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://du2hy7ovj0rwa"]
+[gd_scene load_steps=20 format=3 uid="uid://du2hy7ovj0rwa"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
 [ext_resource type="PackedScene" uid="uid://cnx8e4v6j3cwv" path="res://graphics/environment/objects/tree4.glb" id="2_pr8hr"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dskf2jfwyjfx3" path="res://scenes/levels/castle.tscn" id="13_lkfsn"]
 [ext_resource type="PackedScene" uid="uid://lforr8lmeko6" path="res://graphics/environment/objects/rock5.glb" id="14_phl5l"]
 [ext_resource type="PackedScene" uid="uid://busa8h5c44075" path="res://graphics/environment/objects/platoon.glb" id="16_7p4o7"]
+[ext_resource type="PackedScene" uid="uid://cvse7p2x0vr58" path="res://scenes/vfx/default_lighting.tscn" id="17_ge2pi"]
 [ext_resource type="PackedScene" uid="uid://b7fri258q6w5x" path="res://graphics/environment/objects/rocks4.glb" id="18_7en6q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4lxt"]
@@ -27,7 +28,7 @@ size = Vector2(550, 200)
 [node name="Overworld" instance=ExtResource("1_o48je")]
 
 [node name="Player" parent="Entities" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25382, 12.9031, -107.337)
+transform = Transform3D(0.998904, 0, 0.0468101, 0, 1, 0, -0.0468101, 0, 0.998904, 0.25382, 12.9031, -105.532)
 run_speed = 50.0
 jump_height = 20.0
 sprint_cost = 0.0
@@ -149,3 +150,5 @@ transform = Transform3D(-0.829925, 0, -0.557876, 0, 1, 0, 0.557876, 0, -0.829925
 
 [node name="platoon" parent="Environment" index="13" instance=ExtResource("16_7p4o7")]
 transform = Transform3D(-0.933079, 0, 0.359671, 0, 1, 0, -0.359671, 0, -0.933079, -193.543, -46.6538, 234.282)
+
+[node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("17_ge2pi")]

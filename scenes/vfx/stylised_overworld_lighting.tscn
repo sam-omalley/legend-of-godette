@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://wesoou6vr2m4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ta15e"]
+sky_top_color = Color(0.445294, 0.690417, 0.973534, 1)
+sky_horizon_color = Color(0.675118, 0.72253, 0.795037, 1)
+ground_bottom_color = Color(0.255178, 0.199702, 0.206613, 1)
+ground_horizon_color = Color(0.675118, 0.72253, 0.795037, 1)
+
+[sub_resource type="Sky" id="Sky_rqnn0"]
+sky_material = SubResource("ProceduralSkyMaterial_ta15e")
+
+[sub_resource type="Environment" id="Environment_pyosh"]
+background_mode = 1
+background_color = Color(0.482353, 0.635294, 0.901961, 1)
+sky = SubResource("Sky_rqnn0")
+ambient_light_source = 2
+ambient_light_color = Color(0.968627, 0.835294, 0.858824, 1)
+ambient_light_energy = 0.6
+tonemap_white = 3.17
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+glow_intensity = 0.09
+glow_strength = 0.85
+glow_blend_mode = 1
+fog_enabled = true
+fog_light_color = Color(0.509804, 0.87451, 0.890196, 1)
+fog_density = 0.001
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.2
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_i64jp"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 150.0
+dof_blur_far_transition = 250.0
+dof_blur_near_distance = 13.2
+dof_blur_amount = 0.06
+
+[node name="StylisedOverworldLighting" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pyosh")
+camera_attributes = SubResource("CameraAttributesPractical_i64jp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.941176, 0.941176, 0.941176, 1)
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 4.5
