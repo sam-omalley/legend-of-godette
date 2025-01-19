@@ -147,5 +147,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.3315, -49.5733, 227.14)
 [node name="rocks4" parent="Environment" index="12" instance=ExtResource("18_7en6q")]
 transform = Transform3D(-0.829925, 0, -0.557876, 0, 1, 0, 0.557876, 0, -0.829925, 147.682, -52.4887, 183.826)
 
-[node name="platoon" parent="." index="5" instance=ExtResource("16_7p4o7")]
+[node name="platoon" parent="Environment" index="13" instance=ExtResource("16_7p4o7")]
 transform = Transform3D(-0.933079, 0, 0.359671, 0, 1, 0, -0.359671, 0, -0.933079, -193.543, -46.6538, 234.282)

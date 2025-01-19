@@ -9,6 +9,7 @@ extends MultiMeshInstance3D
 @export var max_scale: float = 3.0
 @export_range(0.0, 1.0, 0.1) var scale_randomisation: float = 0.0
 @export_range(0.0, 1.0, 0.1) var mask_threshold: float = 0.0
+@export var collision_shape: Shape3D = null
 
 # Hack to get a "reload" button. Never set value of checkbox to true.
 @export var reload: bool = false:
@@ -191,6 +192,25 @@ func setup() -> void:
 		t = t.scaled_local(Vector3.ONE * new_scale)
 		t = t.rotated_local(basis.y.normalized(), randf() * 2.0 * PI)
 		multimesh.set_instance_transform(i, t)
+	
+	if collision_shape and not Engine.is_editor_hint():
+
+		for n in self.get_children():
+			self.remove_child(n)
+			n.queue_free()
+		
+		for i in range(multimesh.instance_count):
+			var t: Transform3D = multimesh.get_instance_transform(i)
+
+			var static_body := StaticBody3D.new()
+			var collider := CollisionShape3D.new()
+			collider.shape = collision_shape
+
+			add_child(static_body)
+			static_body.transform = t
+
+			static_body.add_child(collider)
+
 
 func refresh() -> void:
 	if Engine.is_editor_hint():
