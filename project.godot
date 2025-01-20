@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Legend of Godette"
+config/tags=PackedStringArray("3d")
 run/main_scene="res://scenes/levels/overworld.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://graphics/icon.png"
@@ -27,8 +28,9 @@ gdscript/warnings/redundant_static_unload=2
 
 [display]
 
-window/size/viewport_width=1920
+window/size/viewport_width=2560
 window/size/viewport_height=1080
+window/size/initial_position_type=3
 
 [editor_plugins]
 
