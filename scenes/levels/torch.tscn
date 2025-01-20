@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bep6vsktojw2o"]
+
+[ext_resource type="PackedScene" uid="uid://b7wf3jucxaf1v" path="res://graphics/environment/dungeon objects/torch.glb" id="1_6v2xq"]
+[ext_resource type="Script" path="res://scenes/levels/flicker_light.gd" id="2_wxkri"]
+
+[node name="Torch" instance=ExtResource("1_6v2xq")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448848, 0.303651)
+light_color = Color(0.800952, 0.58303, 0.0874252, 1)
+light_energy = 1.2
+script = ExtResource("2_wxkri")
