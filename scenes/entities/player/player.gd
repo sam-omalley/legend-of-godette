@@ -161,7 +161,7 @@ func movement_logic(delta: float) -> void:
 		velocity_2d = velocity_2d.move_toward(velocity_2d.limit_length(speed), deacceleration * delta)
 
 		var target_angle: float = movement_input.angle()
-		skin.rotation.y = rotate_toward(skin.rotation.y, -target_angle + PI/2, rotation_speed * delta)
+		skin.global_rotation.y = rotate_toward(skin.global_rotation.y, -target_angle + PI/2, rotation_speed * delta)
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, deacceleration * delta)
 
@@ -216,7 +216,7 @@ func hit() -> void:
 func shoot_magic(pos: Vector3) -> void:
 	match current_spell:
 		GameStateManager.Spells.FIREBALL:
-			cast_spell.emit(current_spell, pos, skin.basis.z, 1.0)
+			cast_spell.emit(current_spell, pos, skin.global_basis.z, 1.0)
 		GameStateManager.Spells.HEAL:
 			health += 1
 

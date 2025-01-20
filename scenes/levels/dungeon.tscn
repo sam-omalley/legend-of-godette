@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbcisbe7uw8a5"]
+[gd_scene load_steps=12 format=3 uid="uid://dbcisbe7uw8a5"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_7dnb4"]
 [ext_resource type="MeshLibrary" uid="uid://2gyrxkhqdsu" path="res://graphics/environment/dungeon/dungeon_floor_tiles_col.tres" id="2_wual5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://chw0pqeh5pgfm" path="res://graphics/environment/dungeon objects/stool.glb" id="6_hcw6y"]
 [ext_resource type="PackedScene" uid="uid://ben46777uu8eu" path="res://graphics/environment/dungeon objects/table.glb" id="7_e1jms"]
 [ext_resource type="PackedScene" uid="uid://bep6vsktojw2o" path="res://scenes/levels/torch.tscn" id="8_a2n6d"]
+[ext_resource type="PackedScene" uid="uid://cvse7p2x0vr58" path="res://scenes/vfx/default_lighting.tscn" id="9_5nyje"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3jw4"]
 albedo_color = Color(0, 0, 0, 1)
@@ -16,39 +17,10 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_a3jw4")
 size = Vector3(0.5, 3.38, 5.435)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kuqiu"]
-sky_top_color = Color(0.445294, 0.690417, 0.973534, 1)
-sky_horizon_color = Color(0.675118, 0.72253, 0.795037, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.675118, 0.72253, 0.795037, 1)
-
-[sub_resource type="Sky" id="Sky_3wbd8"]
-sky_material = SubResource("ProceduralSkyMaterial_kuqiu")
-
-[sub_resource type="Environment" id="Environment_y1bwl"]
-background_mode = 2
-sky = SubResource("Sky_3wbd8")
-ambient_light_source = 2
-ambient_light_color = Color(0.780392, 0.780392, 0.780392, 1)
-tonemap_mode = 2
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bsyjs"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 50.0
-dof_blur_far_transition = 25.0
-
-[sub_resource type="FogMaterial" id="FogMaterial_qc5b2"]
-emission = Color(0.099986, 0.099986, 0.099986, 1)
-
 [node name="Dungeon" instance=ExtResource("1_7dnb4")]
 
 [node name="Player" parent="Entities" index="0"]
-transform = Transform3D(0.0817646, 0, 0.996652, 0, 1, 0, -0.996652, 0, 0.0817646, 4.57311, 3.32972, -0.164304)
+transform = Transform3D(0.0767712, 0, 0.997049, 0, 1, 0, -0.997049, 0, 0.0767712, 4.57311, 2.06504, -0.164304)
 
 [node name="FloorGrid" type="GridMap" parent="Environment" index="0"]
 mesh_library = ExtResource("2_wual5")
@@ -113,16 +85,4 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.750
 [node name="Torch2" parent="Environment" index="16" instance=ExtResource("8_a2n6d")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.75053, 7.8578, -3.03229)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting" index="0"]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_color = Color(0.4, 0.4, 0.4, 1)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting" index="1"]
-environment = SubResource("Environment_y1bwl")
-camera_attributes = SubResource("CameraAttributesPractical_bsyjs")
-
-[node name="FogVolume" type="FogVolume" parent="Lighting" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.6702, 0.522324, -38.2274)
-size = Vector3(90, 3.04, 107.016)
-material = SubResource("FogMaterial_qc5b2")
+[node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("9_5nyje")]

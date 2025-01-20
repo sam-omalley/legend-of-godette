@@ -28,7 +28,7 @@ size = Vector2(550, 200)
 [node name="Overworld" instance=ExtResource("1_o48je")]
 
 [node name="Player" parent="Entities" index="0"]
-transform = Transform3D(0.998904, 0, 0.0468101, 0, 1, 0, -0.0468101, 0, 0.998904, 0.25382, 12.9031, -105.532)
+transform = Transform3D(0.990411, 0, -0.138153, 0, 1, 0, 0.138153, 0, 0.990411, 0.25382, 12.9031, -105.532)
 
 [node name="OverworldSkin" parent="Environment" index="0" instance=ExtResource("2_ra1tv")]
 
