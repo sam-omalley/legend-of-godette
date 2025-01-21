@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://du2hy7ovj0rwa"]
+[gd_scene load_steps=22 format=3 uid="uid://du2hy7ovj0rwa"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
+[ext_resource type="PackedScene" uid="uid://dfduywyukhfvj" path="res://scenes/entities/other/bird.tscn" id="2_ekan6"]
 [ext_resource type="PackedScene" uid="uid://cnx8e4v6j3cwv" path="res://graphics/environment/objects/tree4.glb" id="2_pr8hr"]
 [ext_resource type="PackedScene" uid="uid://bheg61bc6hroi" path="res://scenes/levels/overworld_skin.tscn" id="2_ra1tv"]
 [ext_resource type="PackedScene" uid="uid://crbb8scv3stc0" path="res://graphics/environment/objects/fence_post.glb" id="4_sssa7"]
@@ -18,6 +19,13 @@
 [ext_resource type="PackedScene" uid="uid://cvse7p2x0vr58" path="res://scenes/vfx/default_lighting.tscn" id="17_ge2pi"]
 [ext_resource type="PackedScene" uid="uid://b7fri258q6w5x" path="res://graphics/environment/objects/rocks4.glb" id="18_7en6q"]
 
+[sub_resource type="Curve3D" id="Curve3D_wop8f"]
+_data = {
+"points": PackedVector3Array(-52.319, 0, -27.2059, 52.319, 0, 27.2059, 90.8781, 0, 110.407, -3.51236, 0, -87.8386, 3.51236, 0, 87.8386, 201.498, 0.0673828, 233.469, 67.6762, 0, -3.52509, -67.6762, 0, 3.52509, -5.02451, -0.345085, 350.701, 29.0257, 0, 46.4419, -29.0257, 0, -46.4419, -170.428, 0.944374, 279.543, -21.0021, 0, 13.4413, 21.0021, 0, -13.4413, -150.34, 0.944336, 159.585, -31.7132, 0, 3.57037, 31.7132, 0, -3.57037, -22.0169, 0.944336, 107.92, -52.319, 0, -27.2059, 52.319, 0, 27.2059, 90.8781, 0, 110.407),
+"tilts": PackedFloat32Array(0.376455, 0.32247, 0.60031, 0.647524, 0.37619, 0, 0.364894)
+}
+point_count = 7
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4lxt"]
 albedo_color = Color(0.0603541, 0.505562, 0.610572, 1)
 
@@ -29,6 +37,23 @@ size = Vector2(550, 200)
 
 [node name="Player" parent="Entities" index="0"]
 transform = Transform3D(0.990411, 0, -0.138153, 0, 1, 0, 0.138153, 0, 0.990411, 0.25382, 12.9031, -105.532)
+
+[node name="BirdPath" type="Path3D" parent="Entities" index="1"]
+curve = SubResource("Curve3D_wop8f")
+
+[node name="Bird" parent="Entities/BirdPath" index="0" instance=ExtResource("2_ekan6")]
+transform = Transform3D(1.36866, -0.54104, 2.83022, 1.17273, 2.96662, 1.42604e-07, -2.63203, 1.04046, 1.47171, 90.8781, 0, 110.407)
+use_model_front = true
+
+[node name="BirdPath2" type="Path3D" parent="Entities" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -108.831)
+curve = SubResource("Curve3D_wop8f")
+
+[node name="Bird" parent="Entities/BirdPath2" index="0" instance=ExtResource("2_ekan6")]
+transform = Transform3D(1.21849, -0.481678, 2.5197, 1.04406, 2.64112, 1.26958e-07, -2.34325, 0.926305, 1.31024, 87.486, 18.5995, 116.93)
+v_offset = 20.0
+use_model_front = true
+speed = 60.0
 
 [node name="OverworldSkin" parent="Environment" index="0" instance=ExtResource("2_ra1tv")]
 
