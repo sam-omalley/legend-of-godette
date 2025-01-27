@@ -8,5 +8,5 @@
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448848, 0.303651)
 light_color = Color(0.800952, 0.58303, 0.0874252, 1)
-light_energy = 1.14943
+light_energy = 1.1122
 script = ExtResource("2_wxkri")

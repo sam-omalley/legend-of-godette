@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://du2hy7ovj0rwa"]
+[gd_scene load_steps=26 format=3 uid="uid://du2hy7ovj0rwa"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
 [ext_resource type="PackedScene" uid="uid://dfduywyukhfvj" path="res://scenes/entities/other/bird.tscn" id="2_ekan6"]
+[ext_resource type="Script" path="res://scenes/levels/overworld.gd" id="2_mips1"]
 [ext_resource type="PackedScene" uid="uid://cnx8e4v6j3cwv" path="res://graphics/environment/objects/tree4.glb" id="2_pr8hr"]
 [ext_resource type="PackedScene" uid="uid://bheg61bc6hroi" path="res://scenes/levels/overworld_skin.tscn" id="2_ra1tv"]
+[ext_resource type="PackedScene" uid="uid://bjxtu5w0iei4s" path="res://scenes/entities/enemies/skeleton_mage.tscn" id="4_bkdxu"]
 [ext_resource type="PackedScene" uid="uid://crbb8scv3stc0" path="res://graphics/environment/objects/fence_post.glb" id="4_sssa7"]
 [ext_resource type="PackedScene" uid="uid://cefax5g013mud" path="res://graphics/environment/objects/fence_middle.glb" id="5_g2pjf"]
 [ext_resource type="PackedScene" uid="uid://b4rhqen2u7u1d" path="res://graphics/environment/objects/campfire.glb" id="6_0p3sb"]
@@ -18,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://busa8h5c44075" path="res://graphics/environment/objects/platoon.glb" id="16_7p4o7"]
 [ext_resource type="PackedScene" uid="uid://cvse7p2x0vr58" path="res://scenes/vfx/default_lighting.tscn" id="17_ge2pi"]
 [ext_resource type="PackedScene" uid="uid://b7fri258q6w5x" path="res://graphics/environment/objects/rocks4.glb" id="18_7en6q"]
+[ext_resource type="PackedScene" uid="uid://bja4s01ithhx" path="res://scenes/entities/enemies/boss.tscn" id="22_11oox"]
 
 [sub_resource type="Curve3D" id="Curve3D_wop8f"]
 _data = {
@@ -33,10 +36,17 @@ albedo_color = Color(0.0603541, 0.505562, 0.610572, 1)
 material = SubResource("StandardMaterial3D_y4lxt")
 size = Vector2(550, 200)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1sy8q"]
+size = Vector3(1, 2.51611, 1.67322)
+
 [node name="Overworld" instance=ExtResource("1_o48je")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.62939e-06, 0.139122, 0.093689)
+script = ExtResource("2_mips1")
 
 [node name="Player" parent="Entities" index="0"]
 transform = Transform3D(0.990411, 0, -0.138153, 0, 1, 0, 0.138153, 0, 0.990411, 0.25382, 12.9031, -105.532)
+run_speed = 50.0
+jump_height = 10.0
 
 [node name="BirdPath" type="Path3D" parent="Entities" index="1"]
 curve = SubResource("Curve3D_wop8f")
@@ -54,6 +64,9 @@ transform = Transform3D(1.21849, -0.481679, 2.5197, 1.04406, 2.64112, 0, -2.3432
 v_offset = 20.0
 use_model_front = true
 speed = 60.0
+
+[node name="Boss" parent="Entities" index="3" instance=ExtResource("22_11oox")]
+transform = Transform3D(-0.976228, 0, -0.216746, 0, 1, 0, 0.216746, 0, -0.976228, 15.9228, -32.741, 351.336)
 
 [node name="OverworldSkin" parent="Environment" index="0" instance=ExtResource("2_ra1tv")]
 
@@ -158,19 +171,44 @@ transform = Transform3D(0.0704877, 0, -0.997513, 0, 1, 0, 0.997513, 0, 0.0704877
 [node name="camp" parent="Environment" index="8" instance=ExtResource("11_k634n")]
 transform = Transform3D(0.476192, 0, 0.879341, 0, 1, 0, -0.879341, 0, 0.476192, -33.5159, -23.465, -20.0338)
 
-[node name="Bridge" parent="Environment" index="9" instance=ExtResource("12_3q8dt")]
+[node name="camp2" parent="Environment" index="9" instance=ExtResource("11_k634n")]
+transform = Transform3D(0.476192, 0, 0.879341, 0, 1, 0, -0.879341, 0, 0.476192, 37.5703, -38.0953, 182.286)
+
+[node name="Bridge" parent="Environment" index="10" instance=ExtResource("12_3q8dt")]
 transform = Transform3D(1.13523, 3.30291e-17, -0.356849, 0.0154224, 1.18889, 0.049063, 0.356516, -0.0514298, 1.13417, 36.5296, -41.2735, 253.401)
 
-[node name="castle" parent="Environment" index="10" instance=ExtResource("13_lkfsn")]
+[node name="castle" parent="Environment" index="11" instance=ExtResource("13_lkfsn")]
 transform = Transform3D(0.212161, 0, 0.977235, 0, 1, 0, -0.977235, 0, 0.212161, 22.593, -37.3298, 365.983)
 
-[node name="rock5" parent="Environment" index="11" instance=ExtResource("14_phl5l")]
+[node name="Area3D" type="Area3D" parent="Environment/castle" index="8"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/castle/Area3D" index="0"]
+transform = Transform3D(0.94031, 0, 0.340314, 0, 1, 0, -0.340314, 0, 0.94031, 5.96194, 7.94835, -7.82394)
+shape = SubResource("BoxShape3D_1sy8q")
+
+[node name="rock5" parent="Environment" index="12" instance=ExtResource("14_phl5l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.3315, -49.5733, 227.14)
 
-[node name="rocks4" parent="Environment" index="12" instance=ExtResource("18_7en6q")]
+[node name="rocks4" parent="Environment" index="13" instance=ExtResource("18_7en6q")]
 transform = Transform3D(-0.829925, 0, -0.557876, 0, 1, 0, 0.557876, 0, -0.829925, 147.682, -52.4887, 183.826)
 
-[node name="platoon" parent="Environment" index="13" instance=ExtResource("16_7p4o7")]
+[node name="platoon" parent="Environment" index="14" instance=ExtResource("16_7p4o7")]
 transform = Transform3D(-0.933079, 0, 0.359671, 0, 1, 0, -0.359671, 0, -0.933079, -193.543, -46.6538, 234.282)
 
 [node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("17_ge2pi")]
+
+[node name="Skeleton Mage" parent="." index="5" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5235, -24.0214, -16.7357)
+
+[node name="Skeleton Mage2" parent="." index="6" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.1977, -22.5538, -26.4366)
+
+[node name="Skeleton Mage3" parent="." index="7" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9902, -23.4459, -20.8303)
+
+[node name="Skeleton Mage4" parent="." index="8" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0993, -21.4289, -29.8039)
+
+[connection signal="body_entered" from="Environment/castle/Area3D" to="." method="_on_door_area_body_entered"]
