@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bep6vsktojw2o"]
+[gd_scene load_steps=11 format=3 uid="uid://bep6vsktojw2o"]
 
 [ext_resource type="PackedScene" uid="uid://b7wf3jucxaf1v" path="res://graphics/environment/dungeon objects/torch.glb" id="1_6v2xq"]
 [ext_resource type="Script" path="res://scenes/levels/flicker_light.gd" id="2_wxkri"]
@@ -7,6 +7,15 @@
 
 [sub_resource type="CurveTexture" id="CurveTexture_nqfc5"]
 curve = SubResource("Curve_f7xya")
+
+[sub_resource type="Gradient" id="Gradient_ravos"]
+offsets = PackedFloat32Array(0, 0.432692, 0.996795, 1)
+colors = PackedColorArray(0.981466, 0.220734, 0, 1, 0.901064, 0.379131, 0.172118, 1, 0.834678, 0.00127778, 0.932666, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4j35r"]
+gradient = SubResource("Gradient_ravos")
+
+[sub_resource type="CurveTexture" id="CurveTexture_b30w0"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ndtci"]
 emission_shape = 1
@@ -18,29 +27,32 @@ gravity = Vector3(0, 3, 0)
 attractor_interaction_enabled = false
 scale_min = 0.1
 scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_4j35r")
 alpha_curve = SubResource("CurveTexture_nqfc5")
+emission_curve = SubResource("CurveTexture_b30w0")
 hue_variation_min = -2.23517e-08
-hue_variation_max = 1.0
+hue_variation_max = -2.23517e-08
 turbulence_enabled = true
 turbulence_noise_strength = 0.1
 turbulence_noise_scale = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0dow"]
-albedo_color = Color(0.867146, 0.501285, 0.151289, 1)
-emission_enabled = true
+vertex_color_use_as_albedo = true
 emission = Color(0.732998, 0.372202, 3.85046e-07, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_8k8xi"]
 material = SubResource("StandardMaterial3D_b0dow")
 radius = 0.1
 height = 0.1
+radial_segments = 16
+rings = 16
 
 [node name="Torch" instance=ExtResource("1_6v2xq")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448848, 0.303651)
 light_color = Color(0.800952, 0.58303, 0.0874252, 1)
-light_energy = 1.0424
+light_energy = 1.06933
 script = ExtResource("2_wxkri")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="2"]
