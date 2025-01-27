@@ -63,6 +63,7 @@ const max_stamina: int = 100
 @onready var invuln_timer: Timer = %InvulnTimer
 
 @onready var ui: Control = %UI
+@onready var run_particles: GPUParticles3D = %RunParticles
 
 var current_spell := GameStateManager.Spells.FIREBALL
 
@@ -170,6 +171,7 @@ func movement_logic(delta: float) -> void:
 	velocity_2d *= speed_modifier
 
 	skin.set_move_speed(velocity_2d.length(), run_speed)
+	run_particles.emitting = is_on_floor() and is_running and movement_input.length() > 0
 
 	velocity.x = velocity_2d.x
 	velocity.z = velocity_2d.y
