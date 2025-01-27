@@ -61,6 +61,11 @@ func move_to_player(delta: float) -> void:
 		
 		# Enemy should move faster when further away.
 		set_move_speed(velocity_2d.length(), run_speed)
+
+		if not is_on_floor():
+			velocity.y -= 2
+		else:
+			velocity.y = 0
 		
 		move_and_slide()
 	else:
@@ -85,7 +90,8 @@ func do_squash_and_stretch(value: float, duration: float) -> void:
 	tween.tween_property(self, "squash_and_stretch", 1.0, duration * 1.8).set_ease(Tween.EASE_OUT)
 
 func shoot_spell() -> void:
-	cast_spell.emit(GameStateManager.Spells.FIREBALL, %SpellMarker.global_position, basis.z, 1.0)
+	var direction = (player.position - position).normalized()
+	cast_spell.emit(GameStateManager.Spells.FIREBALL, %SpellMarker.global_position, direction, 1.0)
 
 func die() -> void:
 	dead = true
