@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://du2hy7ovj0rwa"]
+[gd_scene load_steps=27 format=3 uid="uid://du2hy7ovj0rwa"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
 [ext_resource type="PackedScene" uid="uid://dfduywyukhfvj" path="res://scenes/entities/other/bird.tscn" id="2_ekan6"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cvse7p2x0vr58" path="res://scenes/vfx/default_lighting.tscn" id="17_ge2pi"]
 [ext_resource type="PackedScene" uid="uid://b7fri258q6w5x" path="res://graphics/environment/objects/rocks4.glb" id="18_7en6q"]
 [ext_resource type="PackedScene" uid="uid://bja4s01ithhx" path="res://scenes/entities/enemies/boss.tscn" id="22_11oox"]
+[ext_resource type="PackedScene" uid="uid://crlkr5ng8063k" path="res://scenes/entities/enemies/skeleton_warrior.tscn" id="22_acaxt"]
 
 [sub_resource type="Curve3D" id="Curve3D_wop8f"]
 _data = {
@@ -65,8 +66,38 @@ v_offset = 20.0
 use_model_front = true
 speed = 60.0
 
-[node name="Boss" parent="Entities" index="3" instance=ExtResource("22_11oox")]
-transform = Transform3D(-0.976228, 0, -0.216746, 0, 1, 0, 0.216746, 0, -0.976228, 15.9228, -32.741, 351.336)
+[node name="Skeleton Mage" parent="Entities" index="3" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(-0.946891, 0, 0.321555, 0, 1, 0, -0.321555, 0, -0.946891, 6.29557, -32.7957, 350.518)
+
+[node name="Skeleton Mage2" parent="Entities" index="4" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(-0.823116, 0, -0.567873, 0, 1, 0, 0.567873, 0, -0.823116, 22.5503, -32.7649, 347.395)
+
+[node name="Skeleton Warrior" parent="Entities" index="5" instance=ExtResource("22_acaxt")]
+transform = Transform3D(-0.937428, 0, 0.34818, 0, 1, 0, -0.34818, 0, -0.937428, -34.8742, -17.1365, -20.2309)
+
+[node name="Skeleton Mage3" parent="Entities" index="6" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(-0.747184, 0, 0.664618, 0, 1, 0, -0.664618, 0, -0.747184, -32.2039, -17.1365, -19.9431)
+
+[node name="Skeleton Warrior2" parent="Entities" index="7" instance=ExtResource("22_acaxt")]
+transform = Transform3D(-0.966948, 0, 0.254973, 0, 1, 0, -0.254973, 0, -0.966948, 3.65381, -29.9929, 360.978)
+
+[node name="Skeleton Warrior3" parent="Entities" index="8" instance=ExtResource("22_acaxt")]
+transform = Transform3D(-0.703742, 0, -0.710456, 0, 1, 0, 0.710456, 0, -0.703742, 29.214, -28.4124, 358.318)
+
+[node name="Skeleton Warrior4" parent="Entities" index="9" instance=ExtResource("22_acaxt")]
+transform = Transform3D(-0.994377, 0, -0.1059, 0, 1, 0, 0.1059, 0, -0.994377, 10.8641, -32.765, 359.383)
+
+[node name="Skeleton Warrior5" parent="Entities" index="10" instance=ExtResource("22_acaxt")]
+transform = Transform3D(-0.941712, 0, -0.336421, 0, 1, 0, 0.336421, 0, -0.941712, 22.0992, -32.6939, 357.142)
+
+[node name="Boss" parent="Entities" index="11" instance=ExtResource("22_11oox")]
+transform = Transform3D(-0.993349, 0, 0.115145, 0, 1, 0, -0.115145, 0, -0.993349, 14.3244, -33.6904, 350.054)
+
+[node name="Skeleton Mage4" parent="Entities" index="12" instance=ExtResource("4_bkdxu")]
+transform = Transform3D(-0.875085, 0, 0.48397, 0, 1, 0, -0.48397, 0, -0.875085, 39.134, -31.7832, 181.964)
+
+[node name="Skeleton Warrior6" parent="Entities" index="13" instance=ExtResource("22_acaxt")]
+transform = Transform3D(-0.847307, 0, 0.531103, 0, 1, 0, -0.531103, 0, -0.847307, 36.9303, -31.7668, 181.465)
 
 [node name="OverworldSkin" parent="Environment" index="0" instance=ExtResource("2_ra1tv")]
 
@@ -198,17 +229,5 @@ transform = Transform3D(-0.829925, 0, -0.557876, 0, 1, 0, 0.557876, 0, -0.829925
 transform = Transform3D(-0.933079, 0, 0.359671, 0, 1, 0, -0.359671, 0, -0.933079, -193.543, -46.6538, 234.282)
 
 [node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("17_ge2pi")]
-
-[node name="Skeleton Mage" parent="." index="5" instance=ExtResource("4_bkdxu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5235, -24.0214, -16.7357)
-
-[node name="Skeleton Mage2" parent="." index="6" instance=ExtResource("4_bkdxu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.1977, -22.5538, -26.4366)
-
-[node name="Skeleton Mage3" parent="." index="7" instance=ExtResource("4_bkdxu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9902, -23.4459, -20.8303)
-
-[node name="Skeleton Mage4" parent="." index="8" instance=ExtResource("4_bkdxu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0993, -21.4289, -29.8039)
 
 [connection signal="body_entered" from="Environment/castle/Area3D" to="." method="_on_door_area_body_entered"]
