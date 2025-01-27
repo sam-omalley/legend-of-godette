@@ -1,12 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://bep6vsktojw2o"]
+[gd_scene load_steps=8 format=3 uid="uid://bep6vsktojw2o"]
 
 [ext_resource type="PackedScene" uid="uid://b7wf3jucxaf1v" path="res://graphics/environment/dungeon objects/torch.glb" id="1_6v2xq"]
 [ext_resource type="Script" path="res://scenes/levels/flicker_light.gd" id="2_wxkri"]
+
+[sub_resource type="Curve" id="Curve_f7xya"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_nqfc5"]
+curve = SubResource("Curve_f7xya")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ndtci"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 3.0
+gravity = Vector3(0, 3, 0)
+attractor_interaction_enabled = false
+scale_min = 0.1
+scale_max = 0.2
+alpha_curve = SubResource("CurveTexture_nqfc5")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0dow"]
+albedo_color = Color(0.867146, 0.501285, 0.151289, 1)
+emission_enabled = true
+emission = Color(0.732998, 0.372202, 3.85046e-07, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8k8xi"]
+material = SubResource("StandardMaterial3D_b0dow")
+radius = 0.1
+height = 0.1
 
 [node name="Torch" instance=ExtResource("1_6v2xq")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448848, 0.303651)
 light_color = Color(0.800952, 0.58303, 0.0874252, 1)
-light_energy = 1.1122
+light_energy = 1.0424
 script = ExtResource("2_wxkri")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448848, 0.303651)
+process_material = SubResource("ParticleProcessMaterial_ndtci")
+draw_pass_1 = SubResource("SphereMesh_8k8xi")
