@@ -108,6 +108,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	physics_logic()
+
 func animation_state_update() -> void:
 	if is_on_floor():
 		skin.set_move_state('IdleWalkRun')
@@ -161,7 +163,7 @@ func movement_logic(delta: float) -> void:
 		velocity_2d = velocity_2d.move_toward(velocity_2d.limit_length(speed), deacceleration * delta)
 
 		var target_angle: float = movement_input.angle()
-		skin.global_rotation.y = rotate_toward(skin.global_rotation.y, -target_angle + PI/2, rotation_speed * delta)
+		skin.global_rotation.y = rotate_toward(skin.global_rotation.y, -target_angle + PI / 2, rotation_speed * delta)
 	else:
 		velocity_2d = velocity_2d.move_toward(Vector2.ZERO, deacceleration * delta)
 
@@ -222,3 +224,10 @@ func shoot_magic(pos: Vector3) -> void:
 
 func _on_energy_recovery_timer_timeout() -> void:
 	energy += energy_recovery
+
+
+func physics_logic() -> void:
+	for idx in get_slide_collision_count():
+		var collider = get_slide_collision(idx).get_collider()
+		if collider is RigidBody3D:
+			collider.apply_central_impulse(-get_slide_collision(idx).get_normal() * 5)
