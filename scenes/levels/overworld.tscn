@@ -223,7 +223,4 @@ transform = Transform3D(-0.933079, 0, 0.359671, 0, 1, 0, -0.359671, 0, -0.933079
 
 [node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("17_ge2pi")]
 
-[node name="Camera3D" type="Camera3D" parent="." index="5"]
-transform = Transform3D(0.335271, 0, 0.942122, 0, 1, 0, -0.942122, 0, 0.335271, 0, -31.1487, 292.221)
-
 [connection signal="body_entered" from="Environment/castle/Area3D" to="." method="_on_door_area_body_entered"]
