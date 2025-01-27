@@ -8,5 +8,8 @@ var can_damage: bool = false
 func _process(_delta: float) -> void:
 	if can_damage:
 		var collider: Object = raycast.get_collider()
+		if collider:
+			print(collider)
 		if collider and 'hit' in collider:
 			collider.hit()
+			print("hit")

@@ -1,7 +1,13 @@
+class_name Level
 extends Node3D
 
 @onready var projectiles: Node = %Projectiles
 var fireball_scene: PackedScene = preload("res://scenes/vfx/fireball.tscn")
+
+const scenes = {
+	'dungeon': 'res://scenes/levels/dungeon.tscn',
+	'overworld': 'res://scenes/levels/overworld.tscn'
+}
 
 func _ready() -> void:
 	%Player.death.connect(die)
@@ -26,3 +32,6 @@ func shoot_spell(type: int, pos: Vector3, direction: Vector3, size: float) -> vo
 		fireball.global_position = pos
 		fireball.direction = direction
 		fireball.setup(size)
+
+func switch_level(level_name: String) -> void:
+	get_tree().change_scene_to_file.bind(scenes[level_name]).call_deferred()
