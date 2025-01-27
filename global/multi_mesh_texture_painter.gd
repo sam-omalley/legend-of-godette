@@ -19,7 +19,8 @@ extends MultiMeshInstance3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	setup()
+	if not Engine.is_editor_hint():
+		setup()
 
 func area_of_triangle(a: Vector3, b: Vector3, c: Vector3) -> float:
 	var AB: Vector3 = b - a

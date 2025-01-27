@@ -5,7 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4egsa"]
 render_priority = 0
 shader = ExtResource("1_bs8jp")
-shader_parameter/VertexOffset = 4.0
+shader_parameter/VertexOffset = 1.0
 shader_parameter/Direction = Vector2(1, -0.15)
 shader_parameter/ColorParameter = Color(0.188235, 0.407843, 1, 1)
 
