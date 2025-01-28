@@ -104,6 +104,10 @@ func _on_blink_timer_timeout() -> void:
 	$Timers/BlinkTimer.wait_time = rng.randf_range(1.5, 3.0)
 
 func can_damage(value: bool) -> void:
+	if value and weapon_sword.visible:
+		%SwordSound.pitch_scale = randf_range(0.9, 1.1)
+		%SwordSound.play()
+
 	weapon_sword.can_damage = value
 
 func heal_tween() -> void:

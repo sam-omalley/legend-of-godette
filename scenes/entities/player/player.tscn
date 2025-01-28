@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnuo1oqakdnt"]
+[gd_scene load_steps=10 format=3 uid="uid://cnuo1oqakdnt"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_2htx5"]
 [ext_resource type="PackedScene" uid="uid://c41expxd0tx8c" path="res://scenes/entities/player/camera_controller.tscn" id="2_qbhgi"]
 [ext_resource type="PackedScene" uid="uid://cfvbbx0fgsn5q" path="res://scenes/entities/player/godette_skin.tscn" id="3_go5l8"]
 [ext_resource type="PackedScene" uid="uid://gk6g8x4u43u1" path="res://scenes/entities/player/ui.tscn" id="4_h06f0"]
+[ext_resource type="AudioStream" uid="uid://q016xqptbrb" path="res://audio/steps.mp3" id="5_86a1l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6x2d"]
 
@@ -56,5 +57,16 @@ cast_shadow = 0
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_lk47j")
 draw_pass_1 = SubResource("SphereMesh_0mvv8")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54248, 0)
+current = true
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="StepSound" type="AudioStreamPlayer3D" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("5_86a1l")
+volume_db = -20.0
 
 [connection signal="timeout" from="Timers/EnergyRecoveryTimer" to="." method="_on_energy_recovery_timer_timeout"]

@@ -175,6 +175,13 @@ func movement_logic(delta: float) -> void:
 	skin.set_move_speed(velocity_2d.length(), run_speed)
 	run_particles.emitting = is_on_floor() and is_running and movement_input.length() > 0
 
+	if is_on_floor() and movement_input:
+		if not %StepSound.playing:
+			%StepSound.playing = true
+	else:
+		%StepSound.playing = false
+
+
 	velocity.x = velocity_2d.x
 	velocity.z = velocity_2d.y
 
