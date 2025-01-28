@@ -225,6 +225,7 @@ func shoot_magic(pos: Vector3) -> void:
 			cast_spell.emit(current_spell, pos, skin.global_basis.z, 1.0)
 		GameStateManager.Spells.HEAL:
 			health += 1
+			skin.heal_tween()
 
 func _on_energy_recovery_timer_timeout() -> void:
 	energy += energy_recovery
