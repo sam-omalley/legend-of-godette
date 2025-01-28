@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://du2hy7ovj0rwa"]
+[gd_scene load_steps=27 format=3 uid="uid://du2hy7ovj0rwa"]
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
 [ext_resource type="PackedScene" uid="uid://dfduywyukhfvj" path="res://scenes/entities/other/bird.tscn" id="2_ekan6"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b7fri258q6w5x" path="res://graphics/environment/objects/rocks4.glb" id="18_7en6q"]
 [ext_resource type="PackedScene" uid="uid://bja4s01ithhx" path="res://scenes/entities/enemies/boss.tscn" id="22_11oox"]
 [ext_resource type="PackedScene" uid="uid://crlkr5ng8063k" path="res://scenes/entities/enemies/skeleton_warrior.tscn" id="22_acaxt"]
+[ext_resource type="PackedScene" uid="uid://c3j1pysoqbkt0" path="res://scenes/vfx/grass_blade.tscn" id="23_g6qgq"]
 
 [sub_resource type="Curve3D" id="Curve3D_wop8f"]
 _data = {
@@ -220,6 +221,11 @@ transform = Transform3D(-0.829925, 0, -0.557876, 0, 1, 0, 0.557876, 0, -0.829925
 
 [node name="platoon" parent="Environment" index="14" instance=ExtResource("16_7p4o7")]
 transform = Transform3D(-0.933079, 0, 0.359671, 0, 1, 0, -0.359671, 0, -0.933079, -193.543, -46.6538, 234.282)
+
+[node name="Grass" type="Node3D" parent="Environment" index="15"]
+
+[node name="GrassBlade" parent="Environment" index="16" instance=ExtResource("23_g6qgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40783, 12.7903, -67.6315)
 
 [node name="DefaultLighting" parent="Lighting" index="0" instance=ExtResource("17_ge2pi")]
 

@@ -102,6 +102,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	RenderingServer.global_shader_parameter_set("player_position", global_position);
+
 	jump_logic(delta)
 	movement_logic(delta)
 	animation_state_update()

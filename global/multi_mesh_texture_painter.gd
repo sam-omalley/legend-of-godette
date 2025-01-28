@@ -10,6 +10,7 @@ extends MultiMeshInstance3D
 @export_range(0.0, 1.0, 0.1) var scale_randomisation: float = 0.0
 @export_range(0.0, 1.0, 0.1) var mask_threshold: float = 0.0
 @export var collision_shape: Shape3D = null
+@export var max_angle := 360.0
 
 # Hack to get a "reload" button. Never set value of checkbox to true.
 @export var reload: bool = false:
@@ -99,6 +100,7 @@ func build_cdf_with_mask(mdt: MeshDataTool, image: Image) -> Array[float]:
 		var b: Vector3 = mdt.get_vertex(b_idx)
 		var c: Vector3 = mdt.get_vertex(c_idx)
 
+
 		var a_col: Color = image.get_pixelv(mdt.get_vertex_uv2(a_idx) * Vector2(image.get_size()))
 		var b_col: Color = image.get_pixelv(mdt.get_vertex_uv2(b_idx) * Vector2(image.get_size()))
 		var c_col: Color = image.get_pixelv(mdt.get_vertex_uv2(c_idx) * Vector2(image.get_size()))
@@ -111,12 +113,16 @@ func build_cdf_with_mask(mdt: MeshDataTool, image: Image) -> Array[float]:
 		col *= colour_mask
 		var mask_weight: float = max(col.r, col.g, col.b)
 
+		var normal := mdt.get_face_normal(face_idx);
+
+		var angle_scale = 1.0 - smoothstep(0.0, max_angle, rad_to_deg(normal.angle_to(basis.y)))
+
 		# Weighted area (skip if mask weight is 0)
 		if mask_weight > mask_threshold:
 			# Weight by triangle area and colour
 			#total_weighted_area += area * mask_weight
 			# Weight by triangle area, colour is just used as mask
-			total_weighted_area += area
+			total_weighted_area += area * angle_scale
 			cdf.append(total_weighted_area)
 		else:
 			cdf.append(total_weighted_area)
@@ -154,6 +160,8 @@ func setup() -> void:
 	var mdt := MeshDataTool.new()
 	mdt.create_from_surface(surface.mesh, 0)
 
+	if mask.get_image() == null and not Engine.is_editor_hint():
+		await mask.changed
 	var image := mask.get_image()
 	if image.is_compressed():
 		image.decompress()
