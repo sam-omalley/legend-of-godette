@@ -84,6 +84,13 @@ func hit() -> void:
 		invuln_timer.start()
 		health -= 1
 
+		var tween := create_tween()
+		tween.tween_method(hit_effect, 0.0, 0.5, 0.3)
+		tween.tween_method(hit_effect, 0.5, 0.0, 0.1)
+
+func hit_effect(_value: float) -> void:
+	pass
+
 func do_squash_and_stretch(value: float, duration: float) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "squash_and_stretch", value, duration)
