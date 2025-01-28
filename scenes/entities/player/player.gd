@@ -177,6 +177,7 @@ func movement_logic(delta: float) -> void:
 
 	if is_on_floor() and movement_input:
 		if not %StepSound.playing:
+			%StepSound.pitch_scale = randf_range(0.9, 1.1)
 			%StepSound.playing = true
 	else:
 		%StepSound.playing = false
