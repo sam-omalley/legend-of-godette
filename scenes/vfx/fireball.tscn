@@ -1,25 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6fs5ulhxis2v"]
+[gd_scene load_steps=12 format=3 uid="uid://b6fs5ulhxis2v"]
 
 [ext_resource type="Script" path="res://scenes/vfx/fireball.gd" id="1_bbswu"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trx68"]
-albedo_color = Color(0.873865, 4.71681e-06, 6.73831e-07, 1)
-metallic = 0.36
-roughness = 0.0
-emission = Color(1, 1, 1, 1)
-emission_operator = 1
+[ext_resource type="Shader" path="res://scenes/vfx/fireball.gdshader" id="2_kkjw0"]
+[ext_resource type="ArrayMesh" uid="uid://dbi85xwqaikhi" path="res://graphics/vfx/fireball_shell_mesh.obj" id="3_h4a85"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_es50l"]
+
+[sub_resource type="Gradient" id="Gradient_h40vx"]
+colors = PackedColorArray(0.905882, 0.0901961, 0, 1, 1, 0.870588, 0.262745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_simuj"]
+gradient = SubResource("Gradient_h40vx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tsy68"]
+noise_type = 2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a4bn8"]
+seamless = true
+noise = SubResource("FastNoiseLite_tsy68")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3d53"]
+render_priority = 0
+shader = ExtResource("2_kkjw0")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_a4bn8")
+shader_parameter/gradient_texture = SubResource("GradientTexture1D_simuj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4r3i"]
+albedo_color = Color(0.745098, 0.0235294, 0, 1)
+emission_enabled = true
+emission = Color(0.854902, 0.215686, 0.0705882, 1)
+emission_energy_multiplier = 2.18
+
+[sub_resource type="SphereMesh" id="SphereMesh_2pypo"]
+material = SubResource("StandardMaterial3D_x4r3i")
 
 [node name="Fireball" type="Area3D"]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_bbswu")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-radial_segments = 24
-rings = 12
-material = SubResource("StandardMaterial3D_trx68")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_es50l")
@@ -28,6 +47,16 @@ shape = SubResource("SphereShape3D_es50l")
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
+
+[node name="FireballMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_r3d53")
+mesh = ExtResource("3_h4a85")
+
+[node name="Ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.161879)
+mesh = SubResource("SphereMesh_2pypo")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]
