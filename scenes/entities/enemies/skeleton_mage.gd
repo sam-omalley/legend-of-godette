@@ -11,6 +11,9 @@ const simple_attacks: Dictionary = {
 	'spell': 'Spellcast_Long'
 }
 
+func _ready() -> void:
+	$Skin/Rig/Skeleton3D/Skeleton_Mage_Body.material_overlay.set_shader_parameter('alpha', 0.0)
+
 func _physics_process(delta: float) -> void:
 	move_to_player(delta)
 
@@ -29,3 +32,6 @@ func spell_attack_animation() -> void:
 
 func set_attack_speed(speed: float) -> void:
 	animation_tree.set('parameters/AttackSpeed/scale', speed)
+
+func hit_effect(value: float) -> void:
+	$Skin/Rig/Skeleton3D/Skeleton_Mage_Body.material_overlay.set_shader_parameter('alpha', value)

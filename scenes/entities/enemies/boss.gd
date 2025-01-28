@@ -16,6 +16,9 @@ const simple_attacks: Dictionary = {
 	'range': '1H_Melee_Attack_Stab'
 }
 
+func _ready() -> void:
+	$Skin/Rig/Skeleton3D/Nagonford_Body.material_overlay.set_shader_parameter('alpha', 0.0)
+
 func _physics_process(delta: float) -> void:
 	move_to_player(delta)
 
@@ -83,3 +86,6 @@ func _on_axe_hitbox_body_entered(body: Node3D) -> void:
 
 func can_damage(value: bool) -> void:
 	_can_damage = value
+
+func hit_effect(value: float) -> void:
+	$Skin/Rig/Skeleton3D/Nagonford_Body.material_overlay.set_shader_parameter('alpha', value)

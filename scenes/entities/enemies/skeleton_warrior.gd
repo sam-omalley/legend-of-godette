@@ -14,6 +14,9 @@ const simple_attacks: Dictionary = {
 	'slice': 'Dualwield_Melee_Attack_Slice'
 }
 
+func _ready() -> void:
+	$Skin/Rig/Skeleton3D/Skeleton_Warrior_Body.material_overlay.set_shader_parameter('alpha', 0.0)
+
 func _physics_process(delta: float) -> void:
 	move_to_player(delta)
 
@@ -33,3 +36,6 @@ func set_attack_speed(speed: float) -> void:
 func can_damage(value: bool) -> void:
 	bone_left.can_damage = value
 	bone_right.can_damage = value
+
+func hit_effect(value: float) -> void:
+	$Skin/Rig/Skeleton3D/Skeleton_Warrior_Body.material_overlay.set_shader_parameter('alpha', value)
