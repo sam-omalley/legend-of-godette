@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b6fs5ulhxis2v"]
 
-[ext_resource type="Script" path="res://scenes/vfx/fireball.gd" id="1_bbswu"]
-[ext_resource type="Shader" path="res://scenes/vfx/fireball.gdshader" id="2_kkjw0"]
+[ext_resource type="Script" uid="uid://bqyi0ijql1kk7" path="res://scenes/vfx/fireball.gd" id="1_bbswu"]
+[ext_resource type="Shader" uid="uid://cyo3c40p18pta" path="res://scenes/vfx/fireball.gdshader" id="2_kkjw0"]
 [ext_resource type="ArrayMesh" uid="uid://dbi85xwqaikhi" path="res://graphics/vfx/fireball_shell_mesh.obj" id="3_h4a85"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_es50l"]

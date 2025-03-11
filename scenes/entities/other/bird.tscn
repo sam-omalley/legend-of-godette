@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://dfduywyukhfvj"]
 
-[ext_resource type="Script" path="res://scenes/entities/other/bird.gd" id="1_xrjj1"]
+[ext_resource type="Script" uid="uid://ckjp50idpbqpm" path="res://scenes/entities/other/bird.gd" id="1_xrjj1"]
 [ext_resource type="Texture2D" uid="uid://bhs1csel3g0lx" path="res://graphics/environment/objects/nagon_texture.png" id="2_fka0y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g3t7"]
@@ -296,8 +296,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h70h6"]
 _data = {
-"RESET": SubResource("Animation_iaaw7"),
-"bird_flap": SubResource("Animation_sv7d7")
+&"RESET": SubResource("Animation_iaaw7"),
+&"bird_flap": SubResource("Animation_sv7d7")
 }
 
 [node name="Bird" type="PathFollow3D"]

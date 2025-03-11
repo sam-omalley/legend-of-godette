@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bimgwacilwnwj"]
 
 [ext_resource type="PackedScene" uid="uid://cqxi7o0pyi1mt" path="res://graphics/weapons/bone.gltf.glb" id="1_3no71"]
-[ext_resource type="Script" path="res://scenes/weapons/bone.gd" id="1_h7hl3"]
+[ext_resource type="Script" uid="uid://dnc0qo1wfld6c" path="res://scenes/weapons/bone.gd" id="1_h7hl3"]
 
 [node name="Bone" type="Node3D"]
 script = ExtResource("1_h7hl3")

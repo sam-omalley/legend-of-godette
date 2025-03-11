@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dh1hn2jwpxx2s" path="res://scenes/entities/enemies/enemy.tscn" id="1_euxho"]
 [ext_resource type="PackedScene" uid="uid://bks0ynvp57mq1" path="res://graphics/characters/skeleton warrior/Skeleton_Warrior.glb" id="2_7fxys"]
-[ext_resource type="Script" path="res://scenes/entities/enemies/skeleton_warrior.gd" id="2_surgh"]
+[ext_resource type="Script" uid="uid://ds85ar8qj4kc5" path="res://scenes/entities/enemies/skeleton_warrior.gd" id="2_surgh"]
 [ext_resource type="PackedScene" uid="uid://bimgwacilwnwj" path="res://scenes/weapons/bone.tscn" id="4_pk3t2"]
 [ext_resource type="Material" uid="uid://g6ew0knlgxvg" path="res://scenes/entities/enemies/enemy_overlay.tres" id="4_rr45j"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://bjxtu5w0iei4s"]
 
 [ext_resource type="PackedScene" uid="uid://dh1hn2jwpxx2s" path="res://scenes/entities/enemies/enemy.tscn" id="1_7jlsl"]
-[ext_resource type="Script" path="res://scenes/entities/enemies/skeleton_mage.gd" id="2_pp05a"]
+[ext_resource type="Script" uid="uid://u7j31ruq5rst" path="res://scenes/entities/enemies/skeleton_mage.gd" id="2_pp05a"]
 [ext_resource type="PackedScene" uid="uid://c16qxxd7mhpfp" path="res://graphics/characters/skeleton mage/Skeleton_Mage.glb" id="2_r4f52"]
 [ext_resource type="Material" uid="uid://g6ew0knlgxvg" path="res://scenes/entities/enemies/enemy_overlay.tres" id="4_6ben7"]
 [ext_resource type="PackedScene" uid="uid://02ix7c6cfe1u" path="res://graphics/weapons/wand.gltf" id="4_6sxli"]
