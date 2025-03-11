@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ptutet4tgp0k" path="res://scenes/levels/level.tscn" id="1_o48je"]
 [ext_resource type="PackedScene" uid="uid://dfduywyukhfvj" path="res://scenes/entities/other/bird.tscn" id="2_ekan6"]
-[ext_resource type="Script" path="res://scenes/levels/overworld.gd" id="2_mips1"]
+[ext_resource type="Script" uid="uid://dgfa5ifto8mnp" path="res://scenes/levels/overworld.gd" id="2_mips1"]
 [ext_resource type="PackedScene" uid="uid://cnx8e4v6j3cwv" path="res://graphics/environment/objects/tree4.glb" id="2_pr8hr"]
 [ext_resource type="PackedScene" uid="uid://bheg61bc6hroi" path="res://scenes/levels/overworld_skin.tscn" id="2_ra1tv"]
 [ext_resource type="PackedScene" uid="uid://bjxtu5w0iei4s" path="res://scenes/entities/enemies/skeleton_mage.tscn" id="4_bkdxu"]

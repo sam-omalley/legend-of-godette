@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3j1pysoqbkt0"]
 
-[ext_resource type="Shader" path="res://scenes/vfx/grass_blade.gdshader" id="1_8cd3c"]
+[ext_resource type="Shader" uid="uid://slu7a7p54q5c" path="res://scenes/vfx/grass_blade.gdshader" id="1_8cd3c"]
 [ext_resource type="ArrayMesh" uid="uid://k1syv00tyig8" path="res://graphics/vfx/grass_blade.obj" id="1_m0u66"]
 
 [sub_resource type="Curve" id="Curve_6q8r1"]
@@ -22,10 +22,10 @@ render_priority = 0
 shader = ExtResource("1_8cd3c")
 shader_parameter/colour = Color(0, 0.733333, 0.396078, 1)
 shader_parameter/shadow_colour = Color(0.4, 0.4, 0.4, 1)
-shader_parameter/wind_strength = 0.4
-shader_parameter/player_displacement = 1.5
 shader_parameter/curve_sampler = SubResource("CurveTexture_fu4mb")
 shader_parameter/wind_sampler = SubResource("NoiseTexture2D_n0cr2")
+shader_parameter/wind_strength = 0.4
+shader_parameter/player_displacement = 1.5
 
 [node name="GrassBlade" type="MeshInstance3D"]
 mesh = ExtResource("1_m0u66")

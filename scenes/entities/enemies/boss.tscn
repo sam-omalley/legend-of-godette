@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dh1hn2jwpxx2s" path="res://scenes/entities/enemies/enemy.tscn" id="1_fibmi"]
 [ext_resource type="PackedScene" uid="uid://bt4il726k8d8x" path="res://graphics/characters/nagonford/Nagonford_Animated.glb" id="2_fyx6s"]
-[ext_resource type="Script" path="res://scenes/entities/enemies/boss.gd" id="2_u7s31"]
+[ext_resource type="Script" uid="uid://bw26527552aua" path="res://scenes/entities/enemies/boss.gd" id="2_u7s31"]
 [ext_resource type="Material" uid="uid://g6ew0knlgxvg" path="res://scenes/entities/enemies/enemy_overlay.tres" id="4_7kl2t"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bmtch"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2oqn1264u17x"]
 
-[ext_resource type="Script" path="res://scenes/weapons/sword.gd" id="1_blpyx"]
+[ext_resource type="Script" uid="uid://cr8orswmsffs" path="res://scenes/weapons/sword.gd" id="1_blpyx"]
 [ext_resource type="PackedScene" uid="uid://cp757r6txb0j6" path="res://graphics/weapons/sword_1handed.gltf" id="1_urbuk"]
 
 [node name="Sword" type="Node3D"]

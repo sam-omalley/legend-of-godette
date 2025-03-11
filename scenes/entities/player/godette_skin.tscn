@@ -1,14 +1,14 @@
 [gd_scene load_steps=48 format=3 uid="uid://cfvbbx0fgsn5q"]
 
 [ext_resource type="PackedScene" uid="uid://bctcp65yp8t3f" path="res://graphics/characters/godette/godette.glb" id="1_ma4qe"]
-[ext_resource type="Script" path="res://scenes/entities/player/godette_skin.gd" id="2_aydc2"]
+[ext_resource type="Script" uid="uid://bhpxrj5tcphek" path="res://scenes/entities/player/godette_skin.gd" id="2_aydc2"]
 [ext_resource type="Texture2D" uid="uid://bgh8x0rsl78s5" path="res://graphics/characters/godette/godette_godette_faces.png" id="3_0uuy4"]
 [ext_resource type="Material" uid="uid://6jarwfvx2nuf" path="res://scenes/entities/player/godette_overlay.tres" id="3_mqbva"]
 [ext_resource type="PackedScene" uid="uid://d2oqn1264u17x" path="res://scenes/weapons/sword.tscn" id="4_3qew0"]
 [ext_resource type="PackedScene" uid="uid://dydnnq3ww2uyk" path="res://graphics/weapons/shield.gltf.glb" id="4_llhq1"]
 [ext_resource type="Texture2D" uid="uid://cbf5176yt1e2d" path="res://graphics/weapons/barbarian_texture.png" id="4_tgq61"]
 [ext_resource type="PackedScene" uid="uid://02ix7c6cfe1u" path="res://graphics/weapons/wand.gltf" id="5_v7ldy"]
-[ext_resource type="Script" path="res://scenes/entities/player/animation_tree.gd" id="6_heysr"]
+[ext_resource type="Script" uid="uid://d0d5tdmvnbqka" path="res://scenes/entities/player/animation_tree.gd" id="6_heysr"]
 [ext_resource type="AudioStream" uid="uid://brog30lvnpr6b" path="res://audio/sword sound.wav" id="10_alfws"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfgxy"]
@@ -187,9 +187,7 @@ script = ExtResource("2_aydc2")
 [node name="Skeleton3D" parent="Rig" index="0"]
 bones/1/position = Vector3(0, 0.368249, 0)
 bones/1/rotation = Quaternion(-1.11123e-10, 0.0431578, 2.57241e-09, 0.999068)
-bones/1/scale = Vector3(1, 1, 1)
 bones/2/rotation = Quaternion(-6.93889e-18, 7.10543e-15, 4.93038e-32, 1)
-bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(8.27181e-25, 3.72529e-09, -2.75506e-40, 1)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/position = Vector3(0.212007, 0.134132, 7.92996e-08)
@@ -217,7 +215,6 @@ bones/13/position = Vector3(-1.5736e-08, 0.0961251, -0.0575)
 bones/13/rotation = Quaternion(0.00381155, 0.00448944, 0.703133, 0.711034)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(-5.80608e-11, -0.0313417, -1.88012e-09, 0.999509)
-bones/14/scale = Vector3(1, 1, 1)
 bones/15/position = Vector3(0.170945, 0.113587, 1.59941e-08)
 bones/15/rotation = Quaternion(0.98935, 0.0838184, 0.0788919, 0.0890948)
 bones/15/scale = Vector3(1, 1, 1)
@@ -268,7 +265,6 @@ bones/38/rotation = Quaternion(0.794627, -1.11759e-07, 0.607098, -5.96046e-08)
 bones/39/rotation = Quaternion(-0.707107, -7.27951e-08, -7.27951e-08, 0.707107)
 bones/40/position = Vector3(-0.510844, 0.77144, 0.0597369)
 bones/40/rotation = Quaternion(0.758253, 1.52737e-07, -0.651961, 1.11759e-08)
-bones/40/scale = Vector3(1, 1, 1)
 
 [node name="Godette_ArmLeft" parent="Rig/Skeleton3D" index="0"]
 material_overlay = ExtResource("3_mqbva")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cnuo1oqakdnt"]
 
-[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_2htx5"]
+[ext_resource type="Script" uid="uid://4ud287vgtixr" path="res://scenes/entities/player/player.gd" id="1_2htx5"]
 [ext_resource type="PackedScene" uid="uid://c41expxd0tx8c" path="res://scenes/entities/player/camera_controller.tscn" id="2_qbhgi"]
 [ext_resource type="PackedScene" uid="uid://cfvbbx0fgsn5q" path="res://scenes/entities/player/godette_skin.tscn" id="3_go5l8"]
 [ext_resource type="PackedScene" uid="uid://gk6g8x4u43u1" path="res://scenes/entities/player/ui.tscn" id="4_h06f0"]
