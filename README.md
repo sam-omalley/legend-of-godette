@@ -2,8 +2,6 @@
 
 A [Breath of the Wild](https://www.zelda.com/breath-of-the-wild/) inspired action-adventure game built in [Godot 4](https://godotengine.org/), following the tutorial series [Recreating Zelda: Breath of the Wild in Godot](https://www.youtube.com/watch?v=AoGOIiBo4Eg).
 
-Currently a playable demo.
-
 ## Features
 
 - Third-person character controller with animation tree
@@ -15,3 +13,12 @@ Currently a playable demo.
 ## Running
 
 Open the project in Godot 4 and run the main scene.
+
+## Screenshots
+
+| | |
+|---|---|
+| ![Cave entrance](screenshots/cave-entrance.png) | ![Forest](screenshots/forest-clearing.png) |
+| ![Temple](screenshots/temple.png) | ![Bridge](screenshots/bridge.png) |
+| ![Plateau](screenshots/plateau.png) | ![Dungeon](screenshots/dungeon.png) |
+| ![Dense forest](screenshots/forest-dense.png) | ![Autumn forest](screenshots/forest-autumn.png) |
