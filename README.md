@@ -1,6 +1,6 @@
 # Legend of Godette
 
-A [Breath of the Wild](https://www.zelda.com/breath-of-the-wild/) inspired action-adventure game built in [Godot 4.5](https://godotengine.org/), following the tutorial series [Recreating Zelda: Breath of the Wild in Godot](https://www.youtube.com/watch?v=AoGOIiBo4Eg).
+A [Breath of the Wild](https://www.zelda.com/breath-of-the-wild/) inspired action-adventure game built in [Godot 4.5](https://godotengine.org/), loosely following the tutorial series [Recreating Zelda: Breath of the Wild in Godot](https://www.youtube.com/watch?v=AoGOIiBo4Eg).
 
 ## Features
 
